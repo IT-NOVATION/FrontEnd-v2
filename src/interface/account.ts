@@ -14,5 +14,11 @@ export interface ILoginForm {
 export interface ISignupForm {
   email: string;
   password: string;
-  verifyPassword: string;
+  verifyPassword?: string;
+}
+
+export interface IAddProfileForm {
+  email?: string;
+  nickname: string;
+  introduction: string;
 }

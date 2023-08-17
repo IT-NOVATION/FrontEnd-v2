@@ -5,13 +5,13 @@ import useShowPassword from '@/hooks/useShowPassword';
 import { ISignupForm } from '@/interface/account';
 import { ModalState } from '@/interface/accountModal';
 import { modalStateAtom } from '@/recoil/accountModalAtom';
+import { signup } from '@/service/account';
 import EyeIcon from '@/ui/icons/EyeIcon';
 import EyeInvisibleIcon from '@/ui/icons/EyeInvisibleIcon';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 
 const errorTheme = 'border-theme-red';
-
 export default function SignupForm() {
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
@@ -33,7 +33,13 @@ export default function SignupForm() {
   });
 
   const onValid = async ({ email, password }: ISignupForm) => {
-    // TODO: 회원가입 서버 연동 로직 추가
+    try {
+      await signup({ email, password });
+      email && localStorage.setItem('signup-email', email);
+      setModalState(ModalState.AddProfileForm);
+    } catch (err) {
+      alert('이미 가입된 이메일입니다.');
+    }
   };
   return (
     <section className="w-[400px]">
@@ -129,7 +135,6 @@ export default function SignupForm() {
           </button>
         </div>
         <button
-          type="submit"
           disabled={!isAbled}
           className={`flex justify-center items-center w-[406px] h-[48px] rounded-[25.5px] text-white ${
             isAbled ? 'bg-theme-main' : 'bg-theme-gray'
