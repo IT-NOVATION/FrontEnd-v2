@@ -38,6 +38,7 @@ export default function SignupForm() {
       email && localStorage.setItem('signup-email', email);
       setModalState(ModalState.AddProfileForm);
     } catch (err) {
+      console.log(err);
       alert('이미 가입된 이메일입니다.');
     }
   };
