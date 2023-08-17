@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 export default function Links() {
   const setModalState = useSetRecoilState(modalStateAtom);
   const handleFindPassword = () => {
-    setModalState(ModalState.ChangePasswordForm);
+    setModalState(ModalState.GetCodeForm);
   };
   const handleSignup = () => {
     setModalState(ModalState.TermsForm);

@@ -12,7 +12,6 @@ import Links from './Links/Links';
 import SocailLogin from './SocialLogin/SocialLogin';
 import { ModalState } from '@/interface/accountModal';
 import { login } from '@/service/account';
-import { data } from 'autoprefixer';
 import { useQueryClient } from '@tanstack/react-query';
 
 const errorTheme = 'border-theme-red';

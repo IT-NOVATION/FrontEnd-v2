@@ -22,3 +22,14 @@ export interface IAddProfileForm {
   nickname: string;
   introduction: string;
 }
+
+export interface IGetCodeForm {
+  email: string;
+  code?: string;
+}
+
+export interface IChangePasswordForm {
+  email?: string;
+  password: string;
+  verifyPassword?: string;
+}
