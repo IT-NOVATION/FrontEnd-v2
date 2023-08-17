@@ -13,19 +13,19 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-    },
-    colors: {
-      main: '#AF35FE',
-      lightBlack: '#323232',
-      black: '#000000',
-      white: '#FFFFFF',
-      darkWhite: '#F8F8F8',
-      lightGray: '#B3B3B3',
-      gray: '#CCCCCC',
-      darkGray: '#5F5F5F',
-      red: '#FF5047',
-      bgColor: '#3232328f',
-      modalBg: '#00000099',
+      colors: {
+        'theme-main': '#AF35FE',
+        'theme-lightBlack': '#323232',
+        'theme-black': '#000000',
+        'theme-white': '#FFFFFF',
+        'theme-darkWhite': '#F8F8F8',
+        'theme-lightGray': '#B3B3B3',
+        'theme-gray': '#CCCCCC',
+        'theme-darkGray': '#5F5F5F',
+        'theme-red': '#FF5047',
+        'theme-bgColor': '#3232328f',
+        'theme-modalBg': '#00000099',
+      },
     },
 
     fontSize: {

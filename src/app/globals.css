@@ -5,3 +5,7 @@
 * {
   white-space: pre-line;
 }
+
+input {
+  outline: none;
+}
