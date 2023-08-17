@@ -69,6 +69,7 @@ export default function LoginForm() {
           <button
             onClick={toggleShow}
             className="absolute top-[5px] text-theme-gray right-0"
+            type="button"
           >
             {showPassword ? <EyeIcon /> : <EyeInvisibleIcon />}
           </button>
@@ -79,6 +80,7 @@ export default function LoginForm() {
           </div>
         </div>
         <button
+          type="submit"
           disabled={!isAbled}
           className={`flex justify-center items-center w-[406px] h-[48px] rounded-[25.5px] text-white ${
             isAbled ? 'bg-theme-main' : 'bg-theme-gray'

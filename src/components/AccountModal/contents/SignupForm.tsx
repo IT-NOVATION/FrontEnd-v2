@@ -1,3 +1,5 @@
+'use client';
+
 import useBtnIsAbled from '@/hooks/useBtnIsAbled';
 import useShowPassword from '@/hooks/useShowPassword';
 import { ISignupForm } from '@/interface/account';
@@ -81,6 +83,7 @@ export default function SignupForm() {
             </span>
           </div>
           <button
+            type="button"
             onClick={password.toggleShow}
             className="absolute top-[5px] right-0 text-theme-gray"
           >
@@ -114,6 +117,7 @@ export default function SignupForm() {
             </span>
           </div>
           <button
+            type="button"
             onClick={verifyPassword.toggleShow}
             className="absolute top-[5px] right-0 text-theme-gray"
           >
@@ -125,6 +129,7 @@ export default function SignupForm() {
           </button>
         </div>
         <button
+          type="submit"
           disabled={!isAbled}
           className={`flex justify-center items-center w-[406px] h-[48px] rounded-[25.5px] text-white ${
             isAbled ? 'bg-theme-main' : 'bg-theme-gray'
@@ -135,7 +140,7 @@ export default function SignupForm() {
       </form>
       <div className="flex justify-center gap-[9px] mt-[10px]">
         <p className="text-black body-3">이미 가입하셨나요?</p>
-        <button>
+        <button type="button">
           <p onClick={handleGoLogin} className="text-theme-main text-body3">
             로그인
           </p>
