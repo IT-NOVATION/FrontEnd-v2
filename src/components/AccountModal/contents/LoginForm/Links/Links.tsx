@@ -10,7 +10,7 @@ export default function Links() {
     setModalState(ModalState.ChangePasswordForm);
   };
   const handleSignup = () => {
-    setModalState(ModalState.SignupForm);
+    setModalState(ModalState.TermsForm);
   };
   return (
     <section className="flex flex-col items-center">

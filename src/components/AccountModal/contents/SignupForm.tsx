@@ -1,3 +1,3 @@
 export default function SignupForm() {
-  return <></>;
+  return <section></section>;
 }
