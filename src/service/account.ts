@@ -13,11 +13,10 @@ export const login = (data: ILoginForm) =>
     },
     body: JSON.stringify(data),
   }).then((res) => {
-    console.log(res);
     if (!res.ok) {
       throw new Error(`${res.status} 에러 발생`);
     }
-    return res;
+    return res.json();
   });
 
 export const signup = (data: ISignupForm) =>
@@ -28,7 +27,6 @@ export const signup = (data: ISignupForm) =>
     },
     body: JSON.stringify(data),
   }).then((res) => {
-    console.log(res);
     if (!res.ok) {
       throw new Error(`${res.status} 에러 발생`);
     }
@@ -43,7 +41,6 @@ export const addProfile = (data: IAddProfileForm) =>
     },
     body: JSON.stringify(data),
   }).then((res) => {
-    console.log(res);
     if (!res.ok) {
       throw new Error(`${res.status} 에러 발생`);
     }

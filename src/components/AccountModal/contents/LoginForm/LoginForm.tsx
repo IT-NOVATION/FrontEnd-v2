@@ -10,10 +10,15 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import Links from './Links/Links';
 import SocailLogin from './SocialLogin/SocialLogin';
+import { ModalState } from '@/interface/accountModal';
+import { login } from '@/service/account';
+import { data } from 'autoprefixer';
+import { useQueryClient } from '@tanstack/react-query';
 
 const errorTheme = 'border-theme-red';
 
 export default function LoginForm() {
+  const queryClient = useQueryClient();
   const [modalState, setModalState] = useRecoilState(modalStateAtom);
   const {
     register,
@@ -29,7 +34,18 @@ export default function LoginForm() {
     errors,
     modalState,
   });
-  const onValid = () => {};
+  const onValid = async (data: ILoginForm) => {
+    try {
+      const { accessToken, refreshToken } = await login(data);
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      await queryClient.invalidateQueries();
+      setModalState(ModalState.Off);
+      window.location.reload();
+    } catch (err) {
+      alert('이메일 혹은 비밀번호가 일치하지 않습니다.');
+    }
+  };
   return (
     <div className="w-[400px]">
       <p className="pt-[37px] pb-[32px]">간단하게 무비타임에 참여해볼까요?</p>
@@ -80,7 +96,6 @@ export default function LoginForm() {
           </div>
         </div>
         <button
-          type="submit"
           disabled={!isAbled}
           className={`flex justify-center items-center w-[406px] h-[48px] rounded-[25.5px] text-white ${
             isAbled ? 'bg-theme-main' : 'bg-theme-gray'
