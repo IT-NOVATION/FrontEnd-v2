@@ -1,7 +1,13 @@
-import type { InferGetStaticPropsType, GetStaticProps } from 'next';
+import { SERVER_URI } from './instance';
 
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('https://api.github.com/repos/vercel/next.js');
-  const repo = await res.json();
-  return { props: { repo } };
-};
+const REVIEWS_URI = '/movie-search/review-order';
+const STAR_URI = '/movie-search/star-score-order';
+const RELEASE_DATE_URI = '/movie-search/release-order';
+
+export const getMovieSearchReviewOrder = (pageParam: number) =>
+  fetch(`${SERVER_URI}${REVIEWS_URI}/${pageParam}`).then((res) => {
+    if (!res.ok) {
+      throw new Error(`${res.status} 에러 발생`);
+    }
+    return res.json();
+  });

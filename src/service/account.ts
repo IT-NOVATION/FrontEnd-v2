@@ -20,7 +20,7 @@ const CHANGE_PASSWORD_URI = '/email/password-find/rewrite-pw';
 const LOGIN_STATE_URI = '/user/state';
 
 // 액세스 토큰 갱신
-export const getRefreshedTokens = (callback?: () => void) =>
+export const getRefreshedTokens = (callback: () => Promise<any>) =>
   fetch(`${SERVER_URI}${LOGIN_STATE_URI}`, {
     headers: getRefreshTokenHeader(),
   })
@@ -30,8 +30,11 @@ export const getRefreshedTokens = (callback?: () => void) =>
       }
       return res.json();
     })
-    .then((res) => {
-      console.log(res);
+    .then((json) => {
+      const { accessToken, refreshToken } = json;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      return callback();
     });
 
 // 로그인 상태
@@ -41,7 +44,7 @@ export const getLoginState = () =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens();
+        return getRefreshedTokens(getLoginState);
       }
       throw new Error(`${res.status} 에러 발생`);
     }
@@ -56,9 +59,9 @@ export const login = (data: ILoginForm) =>
     },
     body: JSON.stringify(data),
   }).then((res) => {
-    // if (!res.ok) {
-    //   throw new Error(`${res.status} 에러 발생`);
-    // }
+    if (!res.ok) {
+      throw new Error(`${res.status} 에러 발생`);
+    }
     return res.json();
   });
 

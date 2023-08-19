@@ -30,8 +30,8 @@ export default function SocailLogin() {
       <p className="mt-[15px] mb-[19px] text-body3">간편하게 SNS 로그인</p>
       <ul className="flex items-center justify-center gap-[70px]">
         {socialBtns.map(({ type, button, name, url }) => (
-          <li className="flex flex-col gap-[10px] items-center">
-            <a className="w-[55px] h-[55px]" key={type} href={url}>
+          <li key={type} className="flex flex-col gap-[10px] items-center">
+            <a className="w-[55px] h-[55px]" href={url}>
               {button}
             </a>
             <p className="text-body1">{name}</p>
