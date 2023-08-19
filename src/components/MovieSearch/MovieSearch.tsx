@@ -45,7 +45,7 @@ export default function MovieSearch() {
           <li key={type}>
             <button
               onClick={() => handleClick(type)}
-              className={`text-theme-lightBlack  text-[20px] font-[500] pb-[6px] ${
+              className={`text-theme-lightBlack  text-[20px] font-[400] pb-[6px] ${
                 order === type && 'border-b border-b-theme-main text-theme-main'
               }`}
             >
