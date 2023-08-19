@@ -9,6 +9,12 @@ import MovieSearchGroup from './MovieSearchGroup/MovieSearchGroup';
 
 export type MovieSearchOrder = 'reviews' | 'star' | 'releaseDate';
 
+const orders: { name: string; type: MovieSearchOrder }[] = [
+  { name: '리뷰 수', type: 'reviews' },
+  { name: '평점', type: 'star' },
+  { name: '개봉일자', type: 'releaseDate' },
+];
+
 export default function MovieSearch() {
   const [order, setOrder] = useState<MovieSearchOrder>('reviews');
   const { data, hasNextPage, fetchNextPage, isLoading } =
@@ -29,9 +35,25 @@ export default function MovieSearch() {
     onIntersect: fetchNextPage,
     enabled: hasNextPage,
   });
-
+  const handleClick = (type: MovieSearchOrder) => {
+    setOrder(type);
+  };
   return (
-    <section className="w-full">
+    <section className="w-full flex flex-col">
+      <ul className="flex gap-[60px] mb-[30px]">
+        {orders.map(({ name, type }) => (
+          <li key={type}>
+            <button
+              onClick={() => handleClick(type)}
+              className={`text-theme-lightBlack  text-[20px] font-[500] pb-[6px] ${
+                order === type && 'border-b border-b-theme-main text-theme-main'
+              }`}
+            >
+              {name}
+            </button>
+          </li>
+        ))}
+      </ul>
       {data &&
         data.pages.map((result) => (
           <MovieSearchGroup

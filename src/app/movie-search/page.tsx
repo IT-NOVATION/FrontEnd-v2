@@ -3,9 +3,8 @@ import { IMovieSearchMovies } from '@/interface/movieSearch';
 import { getMovieSearch } from '@/service/movieSearch';
 import getQueryClient from '@/service/queryClient';
 import RightChevronIcon from '@/ui/icons/RightChevronIcon';
-import { dehydrate, useQuery, Hydrate } from '@tanstack/react-query';
+import { dehydrate, Hydrate } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export default async function MovieSearchPage() {
   const queryClient = getQueryClient();
@@ -19,7 +18,7 @@ export default async function MovieSearchPage() {
       <h1 className="text-[#5f5f5f] text-[64px] font-[500] mt-[15px]">
         무비서치
       </h1>
-      <p className="text-title4 text-theme-lightBlack leading-[1.5] mb-[220px]">
+      <p className="text-title4 text-theme-lightBlack leading-[1.5] mb-[150px]">
         It’s Movie Time에서는 매주 영화 정보를 업데이트 하고있습니다.
         {'\n'}
         원하는 영화가 보이지 않는다면 상단의 검색 기능을 활용해보세요.
