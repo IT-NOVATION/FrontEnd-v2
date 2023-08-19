@@ -5,6 +5,7 @@ import { IMovieSearchMovies } from '@/interface/movieSearch';
 import { getMovieSearchReviewOrder } from '@/service/movieSearch';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRef } from 'react';
+import MovieSearchGroup from './MovieSearchGroup';
 
 export default function MovieSearch() {
   const { data, hasNextPage, fetchNextPage, isLoading } =
@@ -27,10 +28,10 @@ export default function MovieSearch() {
   });
 
   return (
-    <section className="grid grid-cols-4 gap-5 h-[200vh]">
+    <section className="w-full">
       {data &&
-        data.pages[0].moiveSearchDtoList.map((movie) => (
-          <div key={movie.movieTitle}>{movie.movieTitle}</div>
+        data.pages.map((result) => (
+          <MovieSearchGroup key={result.nowPage} result={result} />
         ))}
       <div ref={getMoreMovies} />
     </section>

@@ -1,4 +1,5 @@
 export interface IMovieSearchMovie {
+  movieId: number;
   movieImg: string;
   movieTitle: string;
   starScore: number;
@@ -10,5 +11,5 @@ export interface IMovieSearchMovies {
   lastPage: number;
   firstPage: number;
   nowPage: number;
-  moiveSearchDtoList: IMovieSearchMovie[];
+  movies: IMovieSearchMovie[];
 }

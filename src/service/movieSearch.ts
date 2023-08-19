@@ -5,9 +5,13 @@ const STAR_URI = '/movie-search/star-score-order';
 const RELEASE_DATE_URI = '/movie-search/release-order';
 
 export const getMovieSearchReviewOrder = (pageParam: number) =>
-  fetch(`${SERVER_URI}${REVIEWS_URI}/${pageParam}`).then((res) => {
-    if (!res.ok) {
-      throw new Error(`${res.status} 에러 발생`);
-    }
-    return res.json();
-  });
+  fetch(`${SERVER_URI}${REVIEWS_URI}/${pageParam}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`${res.status} 에러 발생`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      return { ...data, movies: data.moiveSearchDtoList };
+    });
