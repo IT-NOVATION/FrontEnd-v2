@@ -13,6 +13,7 @@ import SocailLogin from './SocialLogin/SocialLogin';
 import { ModalState } from '@/interface/accountModal';
 import { login } from '@/service/account';
 import { useQueryClient } from '@tanstack/react-query';
+import { Cookies, useCookies } from 'react-cookie';
 
 const errorTheme = 'border-theme-red';
 
@@ -33,14 +34,15 @@ export default function LoginForm() {
     errors,
     modalState,
   });
+  const [cookies, setCookie, removeCookie] = useCookies(['tokens']);
   const onValid = async (data: ILoginForm) => {
     try {
       const { accessToken, refreshToken } = await login(data);
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
+      setCookie('tokens', [accessToken, refreshToken]);
       await queryClient.invalidateQueries();
       setModalState(ModalState.Off);
-      window.location.reload();
     } catch (err) {
       alert('이메일 혹은 비밀번호가 일치하지 않습니다.');
     }

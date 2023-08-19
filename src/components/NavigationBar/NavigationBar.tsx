@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import logo from '../../../public/images/logo.png';
-import Image from 'next/image';
 import SearchWhiteIcon from '@/ui/icons/SearchWhiteIcon';
 import Logo from '@/ui/icons/Logo';
 import { useSetRecoilState } from 'recoil';
 import { modalStateAtom } from '@/recoil/accountModalAtom';
 import { ModalState } from '@/interface/accountModal';
+import useLoginState from '@/hooks/useLoginState';
+import { motion } from 'framer-motion';
 
 const items = [
   {
@@ -25,8 +25,9 @@ export default function NavigationBar() {
   const handleLoginClick = () => {
     setModalState(ModalState.LoginForm);
   };
+  // const loginState = useLoginState();
   return (
-    <nav className="flex items-center w-full min-w-[1100px] h-[85px] z-10 py-[20px] px-[50px] justify-between">
+    <motion.nav className="flex items-center w-full min-w-[1100px] h-[85px] z-10 py-[20px] px-[50px] justify-between">
       <div className="flex items-center gap-[70px] ">
         <Link href="/">
           <Logo />
@@ -48,6 +49,6 @@ export default function NavigationBar() {
           {'로그인 / 회원가입'}
         </button>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

@@ -33,3 +33,10 @@ export interface IChangePasswordForm {
   password: string;
   verifyPassword?: string;
 }
+
+export interface ILoginState {
+  loginState: boolean;
+  userId: number | null;
+  nickname: string | null;
+  profileImg: string | null;
+}
