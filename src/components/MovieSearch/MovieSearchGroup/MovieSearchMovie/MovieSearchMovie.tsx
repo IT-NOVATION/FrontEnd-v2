@@ -1,7 +1,11 @@
+'use client';
+
 import Image from 'next/image';
 import { IMovieSearchMovie } from '@/interface/movieSearch';
 import Link from 'next/link';
 import MainStarIcon from '@/ui/icons/MainStarIcon';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 type Props = {
   movie: IMovieSearchMovie;

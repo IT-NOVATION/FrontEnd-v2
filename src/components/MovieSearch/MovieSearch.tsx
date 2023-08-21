@@ -4,7 +4,7 @@ import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { IMovieSearchMovies } from '@/interface/movieSearch';
 import { getMovieSearch } from '@/service/movieSearch';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import MovieSearchGroup from './MovieSearchGroup/MovieSearchGroup';
 
 export type MovieSearchOrder = 'reviews' | 'star' | 'releaseDate';
@@ -17,7 +17,7 @@ const orders: { name: string; type: MovieSearchOrder }[] = [
 
 export default function MovieSearch() {
   const [order, setOrder] = useState<MovieSearchOrder>('reviews');
-  const { data, hasNextPage, fetchNextPage, isLoading } =
+  const { data, hasNextPage, fetchNextPage } =
     useInfiniteQuery<IMovieSearchMovies>({
       queryKey: ['movieSearch', `${order}`],
       queryFn: ({ pageParam = 1 }) => getMovieSearch(order, pageParam),
@@ -56,11 +56,13 @@ export default function MovieSearch() {
       </ul>
       {data &&
         data.pages.map((result) => (
+          // <Suspense fallback={<div>Loading...</div>}>
           <MovieSearchGroup
             key={result.nowPage}
             pageNum={result.nowPage}
             result={result}
           />
+          // </Suspense>
         ))}
       <div ref={getMoreMovies} />
     </section>
