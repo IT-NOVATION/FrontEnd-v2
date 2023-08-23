@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.themoviedb.org',
       },
+      {
+        protocol: 'http',
+        hostname: 'd1yzu8dcirp0jm.cloudfront.net',
+      },
     ],
   },
 };
