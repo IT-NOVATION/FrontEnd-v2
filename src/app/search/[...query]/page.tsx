@@ -1,4 +1,4 @@
-import { SearchType } from '@/components/Search/SearchBox';
+import { SearchType } from '@/components/SearchBox/SearchBox';
 
 type Props = {
   params: {

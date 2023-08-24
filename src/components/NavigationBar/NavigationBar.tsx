@@ -7,13 +7,14 @@ import { useSetRecoilState } from 'recoil';
 import { modalStateAtom } from '@/recoil/accountModalAtom';
 import { ModalState } from '@/interface/accountModal';
 import useLoginState from '@/hooks/useLoginState';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import AlarmIcon from '@/ui/icons/AlarmIcon';
 import ProfileImg from '@/ui/user/ProfileImg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ExitThinIcon from '@/ui/icons/ExitThinIcon';
-import SearchBox from '../Search/SearchBox';
+import SearchBox from '../SearchBox/SearchBox';
 import { usePathname } from 'next/navigation';
+import useNavBarAnimation from '@/hooks/useNavBarAnimation';
 
 const items = [
   {
@@ -40,52 +41,65 @@ export default function NavigationBar() {
   const handleExitClick = () => {
     setIsSearching(false);
   };
+  const { isVisible, variants } = useNavBarAnimation();
   return (
-    <motion.nav className="fixed z-[19] bg-white flex items-center w-full min-w-[1100px] h-[85px] z-10 py-[20px] px-[50px] justify-between">
-      <div className="flex items-center gap-[70px] ">
-        <Link href="/">
-          <Logo />
-        </Link>
-        {items.map(({ name, link }) => (
-          <Link className="text-title5" key={name} href={link}>
-            {name}
-          </Link>
-        ))}
-      </div>
-      <div className="flex items-center gap-[30px]">
-        {isSearching ? (
-          !pathname.includes('/search') && (
-            <button onClick={handleExitClick}>
-              <ExitThinIcon />
-            </button>
-          )
-        ) : (
-          <button onClick={handleSearchClick}>
-            <SearchWhiteIcon />
-          </button>
-        )}
-        {loginState ? (
-          <>
-            <AlarmIcon />
-            <Link href={`/movielog/${userId}`}>
-              <button className="w-[107px] h-[43px] rounded-[20px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]">
-                {'무비로그'}
-              </button>
+    <AnimatePresence initial={false}>
+      {isVisible && (
+        <motion.nav
+          variants={variants}
+          initial="initial"
+          exit="exit"
+          animate="animate"
+          key="nav"
+          transition={{ type: 'linear', duration: 0.5 }}
+          className="fixed z-[19] bg-white flex items-center w-full min-w-[1100px] h-[85px] z-10 py-[20px] px-[50px] justify-between"
+        >
+          <div className="flex items-center gap-[70px] ">
+            <Link href="/">
+              <Logo />
             </Link>
-            <button className="rounded-full">
-              <ProfileImg src={profileImg} size={42} />
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={handleLoginClick}
-            className="w-[170px] h-[43px] rounded-[15px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]"
-          >
-            {'로그인 / 회원가입'}
-          </button>
-        )}
-      </div>
-      {isSearching && <SearchBox initialType="Movie" />}
-    </motion.nav>
+            {items.map(({ name, link }) => (
+              <Link className="text-title5" key={name} href={link}>
+                {name}
+              </Link>
+            ))}
+          </div>
+          <div className="flex items-center gap-[30px]">
+            {isSearching ? (
+              !pathname.includes('/search') && (
+                <button onClick={handleExitClick}>
+                  <ExitThinIcon />
+                </button>
+              )
+            ) : (
+              <button onClick={handleSearchClick}>
+                <SearchWhiteIcon />
+              </button>
+            )}
+            {loginState ? (
+              <>
+                <AlarmIcon />
+                <Link href={`/movielog/${userId}`}>
+                  <button className="w-[107px] h-[43px] rounded-[20px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]">
+                    {'무비로그'}
+                  </button>
+                </Link>
+                <button className="rounded-full w-[42px] h-[42px] relative">
+                  <ProfileImg src={profileImg} />
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={handleLoginClick}
+                className="w-[170px] h-[43px] rounded-[15px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]"
+              >
+                {'로그인 / 회원가입'}
+              </button>
+            )}
+          </div>
+          {isSearching && <SearchBox initialType="Movie" />}
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }

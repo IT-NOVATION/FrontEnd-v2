@@ -17,7 +17,6 @@ export default function MovieSearchMovie({ movie, rank }: Props) {
           <Image
             src={movie.movieImg}
             alt={`${movie.movieTitle} 포스터`}
-            objectFit="cover"
             width={205}
             height={292}
             className="w-[205px] h-[292px] rounded-[10px]"

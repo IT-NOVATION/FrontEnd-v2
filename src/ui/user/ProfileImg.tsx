@@ -4,16 +4,14 @@ import defaultProfile from '../../../public/images/defaultProfile.png';
 type Props = {
   src: string | null;
   className?: string;
-  size: number;
 };
 
-export default function ProfileImg({ className, src, size }: Props) {
+export default function ProfileImg({ className, src }: Props) {
   return (
     <Image
       src={src || defaultProfile}
       className={`rounded-full object-cover aspect-square ${className}`}
-      width={size}
-      height={size}
+      fill
       alt="프로필 이미지"
     />
   );
