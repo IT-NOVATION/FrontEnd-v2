@@ -1,8 +1,8 @@
 type Props = {
-  className: string;
+  className?: string;
 };
 
-export default function Exit({ className }: Props) {
+export default function ExitIcon({ className }: Props) {
   return (
     <svg
       className={className}

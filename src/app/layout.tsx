@@ -21,9 +21,9 @@ export default function RootLayout({
         <RecoilRootContext>
           <QueryClientContext>
             <CookieProviderContext>
-              <AccountModal />
               <NavigationBar />
-              {children}
+              <AccountModal />
+              <div className="pt-[85px]">{children}</div>
             </CookieProviderContext>
           </QueryClientContext>
         </RecoilRootContext>

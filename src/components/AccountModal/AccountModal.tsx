@@ -4,7 +4,7 @@ import { ModalState } from '@/interface/accountModal';
 import { modalStateAtom } from '@/recoil/accountModalAtom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { AnimatePresence, motion } from 'framer-motion';
-import Exit from '@/ui/icons/Exit';
+import Exit from '@/ui/icons/ExitIcon';
 import LoginForm from './contents/LoginForm/LoginForm';
 import AddProfileForm from './contents/AddProfileForm';
 import ChangePasswordForm from './contents/ChangePasswordForm';
