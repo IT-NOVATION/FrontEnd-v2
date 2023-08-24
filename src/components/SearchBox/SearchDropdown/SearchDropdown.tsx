@@ -2,6 +2,7 @@ import useHovered from '@/hooks/useHovered';
 import DropdownIcon from '@/ui/icons/DropdownIcon';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { SearchType } from '../SearchBox';
+import useOutsideClick from '@/hooks/useOutsideClick';
 
 type Props = {
   searchType: SearchType;
@@ -13,18 +14,8 @@ export default function SearchDropdown({ searchType, setSearchType }: Props) {
   const movieHover = useHovered();
   const dropdownRef = useRef<HTMLUListElement | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const clickModalOutside = (event: any) => {
-    if (dropdownOpen && !dropdownRef.current?.contains(event.target)) {
-      setDropdownOpen(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('mousedown', clickModalOutside);
+  useOutsideClick(dropdownRef, dropdownOpen, setDropdownOpen);
 
-    return () => {
-      document.removeEventListener('mousedown', clickModalOutside);
-    };
-  });
   const handleClick = () => {
     setDropdownOpen((prev) => !prev);
   };
@@ -37,7 +28,7 @@ export default function SearchDropdown({ searchType, setSearchType }: Props) {
       {dropdownOpen ? (
         <ul
           ref={dropdownRef}
-          className="absolute top-[27px] w-[105px] bg-white shadow-[4px_4px_4px_0px_#ccc] z-100"
+          className="absolute top-[27px] w-[105px] bg-white shadow-[4px_4px_4px_0px_#ccc] z-[100]"
         >
           <li
             onMouseEnter={userHover.handleHover}

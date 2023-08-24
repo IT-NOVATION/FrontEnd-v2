@@ -12,6 +12,7 @@
   border: #7f7f7f solid 1px;
   font-size: 16px;
   text-align: left;
+  z-index: 44;
 }
 .dropdownLayout::before {
   content: '';

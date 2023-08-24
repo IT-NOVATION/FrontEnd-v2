@@ -7,6 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import serviceIntroImg from '../../../../public/images/service_intro.png';
 import inquireImg from '../../../../public/images/inquire.png';
+import useOutsideClick from '@/hooks/useOutsideClick';
 
 type Props = {
   dropdownOpen: boolean;
@@ -21,18 +22,7 @@ export default function ProfileDropdown({
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [modal, setModal] = useState<string | null>(null);
 
-  const clickModalOutside = (event: any) => {
-    if (dropdownOpen && !dropdownRef.current?.contains(event.target)) {
-      setDropdownOpen(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('mousedown', clickModalOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', clickModalOutside);
-    };
-  });
+  useOutsideClick(dropdownRef, dropdownOpen, setDropdownOpen);
 
   const handleLogout = async () => {
     // 로그아웃
@@ -48,7 +38,7 @@ export default function ProfileDropdown({
   return (
     <>
       <div className={styles.dropdownLayout} ref={dropdownRef}>
-        <ul className="flex flex-col gap-y-[10px]">
+        <ul className="flex flex-col gap-y-[10px] ">
           <li
             onClick={handleLogout}
             className="flex items-center gap-[5px] cursor-pointer"
