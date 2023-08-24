@@ -85,7 +85,10 @@ export default function NavigationBar() {
               <>
                 <AlarmIcon />
                 <Link href={`/movielog/${userId}`}>
-                  <button className="w-[107px] h-[43px] rounded-[20px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]">
+                  <button
+                    onClick={toggleDropdown}
+                    className="w-[107px] h-[43px] rounded-[20px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]"
+                  >
                     {'무비로그'}
                   </button>
                 </Link>
@@ -94,15 +97,15 @@ export default function NavigationBar() {
                   className="rounded-full w-[42px] h-[42px] relative"
                 >
                   <ProfileImg src={profileImg} />
-                  {dropdownOpen && (
-                    <div className="absolute top-[65px] right-[-25px]">
-                      <ProfileDropdown
-                        dropdownOpen={dropdownOpen}
-                        setDropdownOpen={setDropdownOpen}
-                      />
-                    </div>
-                  )}
                 </button>
+                {dropdownOpen && (
+                  <div className="absolute top-[85px] right-[20px]">
+                    <ProfileDropdown
+                      dropdownOpen={dropdownOpen}
+                      setDropdownOpen={setDropdownOpen}
+                    />
+                  </div>
+                )}
               </>
             ) : (
               <button

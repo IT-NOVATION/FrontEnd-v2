@@ -5,6 +5,9 @@
 * {
   white-space: pre-line;
 }
+body {
+  overflow-x: hidden;
+}
 
 input {
   outline: none;
