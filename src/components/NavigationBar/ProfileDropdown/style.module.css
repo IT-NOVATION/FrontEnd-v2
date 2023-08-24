@@ -1,0 +1,39 @@
+.dropdownLayout {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 128px;
+  height: 126px;
+  position: relative;
+  padding: 0 3px;
+  background: #ffffff;
+  border: #7f7f7f solid 1px;
+  font-size: 16px;
+  text-align: left;
+}
+.dropdownLayout::before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 16px 20px 17.5px;
+  border-color: #7f7f7f transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -20px;
+  left: 62px;
+}
+.dropdownLayout::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 16px 20px 17.5px;
+  border-color: #ffffff transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -18.5px;
+  left: 62px;
+}

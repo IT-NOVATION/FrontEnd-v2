@@ -10,11 +10,12 @@ import useLoginState from '@/hooks/useLoginState';
 import { motion, AnimatePresence } from 'framer-motion';
 import AlarmIcon from '@/ui/icons/AlarmIcon';
 import ProfileImg from '@/ui/user/ProfileImg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ExitThinIcon from '@/ui/icons/ExitThinIcon';
 import SearchBox from '../SearchBox/SearchBox';
 import { usePathname } from 'next/navigation';
 import useNavBarAnimation from '@/hooks/useNavBarAnimation';
+import ProfileDropdown from './ProfileDropdown/ProfileDropdown';
 
 const items = [
   {
@@ -42,6 +43,10 @@ export default function NavigationBar() {
     setIsSearching(false);
   };
   const { isVisible, variants } = useNavBarAnimation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => !prev);
+  };
   return (
     <AnimatePresence initial={false}>
       {isVisible && (
@@ -84,8 +89,19 @@ export default function NavigationBar() {
                     {'무비로그'}
                   </button>
                 </Link>
-                <button className="rounded-full w-[42px] h-[42px] relative">
+                <button
+                  onClick={toggleDropdown}
+                  className="rounded-full w-[42px] h-[42px] relative"
+                >
                   <ProfileImg src={profileImg} />
+                  {dropdownOpen && (
+                    <div className="absolute top-[65px] right-[-25px]">
+                      <ProfileDropdown
+                        dropdownOpen={dropdownOpen}
+                        setDropdownOpen={setDropdownOpen}
+                      />
+                    </div>
+                  )}
                 </button>
               </>
             ) : (
