@@ -65,13 +65,16 @@ export default function Banners() {
         {Array(4)
           .fill(0)
           .map((_, i) => (
+              
+              <li key={i} >
             <button
               disabled={isAnimating}
               onClick={() => handleIndicatorClick(i)}
               className="rounded-full"
             >
-              <BannerIndicator key={i} selected={i === slide} />
+              <BannerIndicator  selected={i === slide} />
             </button>
+            </li>
           ))}
       </ul>
     </div>
