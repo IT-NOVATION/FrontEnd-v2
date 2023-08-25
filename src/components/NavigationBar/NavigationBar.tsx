@@ -57,7 +57,7 @@ export default function NavigationBar() {
           animate="animate"
           key="nav"
           transition={{ type: 'linear', duration: 0.5 }}
-          className="fixed z-[19] bg-white flex items-center w-full min-w-[1100px] h-[85px] z-10 py-[20px] px-[50px] justify-between"
+          className="fixed z-[19] flex items-center w-full min-w-[1100px] h-[85px] z-10 py-[20px] px-[50px] justify-between"
         >
           <div className="flex items-center gap-[70px] ">
             <Link href="/">

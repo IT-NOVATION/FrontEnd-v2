@@ -13,14 +13,14 @@ export default function ExitIcon({ className }: Props) {
       <path
         d="M3.80527 14.2517L14.1948 3.75176"
         stroke="#323232"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M3.80469 3.75L14.1942 14.25"
         stroke="#323232"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );

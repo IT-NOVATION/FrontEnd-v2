@@ -23,7 +23,7 @@ export default function RootLayout({
             <CookieProviderContext>
               <NavigationBar />
               <AccountModal />
-              <div className="pt-[85px]">{children}</div>
+              {children}
             </CookieProviderContext>
           </QueryClientContext>
         </RecoilRootContext>

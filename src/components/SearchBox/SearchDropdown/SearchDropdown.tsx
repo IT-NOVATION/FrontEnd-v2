@@ -1,6 +1,6 @@
 import useHovered from '@/hooks/useHovered';
 import DropdownIcon from '@/ui/icons/DropdownIcon';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { SearchType } from '../SearchBox';
 import useOutsideClick from '@/hooks/useOutsideClick';
 
