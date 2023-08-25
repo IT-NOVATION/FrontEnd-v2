@@ -2,7 +2,6 @@
 
 import { IMovieTimeMovie } from '@/interface/movieTime';
 import MovieTimeMovie from './MovieTimeMovie/MovieTimeMovie';
-import { Suspense, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 type Props = {
