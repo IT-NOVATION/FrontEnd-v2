@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  white-space: pre-line;
+}
+body {
+  overflow-x: hidden;
+}
+
+input {
+  outline: none;
+}
