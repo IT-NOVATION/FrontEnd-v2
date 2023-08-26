@@ -12,3 +12,15 @@ body {
 input {
   outline: none;
 }
+::-webkit-scrollbar {
+  /* Customize the scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  /* Customize the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  /* Customize the scrollbar thumb */
+  color: white;
+}

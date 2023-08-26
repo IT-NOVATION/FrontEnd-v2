@@ -55,14 +55,12 @@ export default function MovieSearch() {
         ))}
       </ul>
       {data &&
-        data.pages.map((result) => (
-          // <Suspense fallback={<div>Loading...</div>}>
+        data.pages.map((result, idx) => (
           <MovieSearchGroup
-            key={result.nowPage}
+            key={idx}
             pageNum={result.nowPage}
             result={result}
           />
-          // </Suspense>
         ))}
       <div ref={getMoreMovies} />
     </section>
