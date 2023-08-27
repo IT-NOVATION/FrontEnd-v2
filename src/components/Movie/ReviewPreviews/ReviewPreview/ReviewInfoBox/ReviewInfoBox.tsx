@@ -14,7 +14,7 @@ export default function ReviewInfoBox({ review }: Props) {
     <section className="flex flex-col w-[719px] h-full justify-between">
       <div className="flex gap-[8px] ">
         <Link href={`/review/${review.reviewId}`}>
-          <p className="text-theme-lightBlack text-title5">
+          <p className="text-theme-lightBlack text-title5 hover:underline underline-offset-1">
             {review.reviewTitle}
           </p>
         </Link>
@@ -23,13 +23,18 @@ export default function ReviewInfoBox({ review }: Props) {
           <span className="text-body5">{review.starScore?.toFixed(1)}</span>
         </div>
       </div>
-      <p
-        className={`mt-[5px] text-theme-lightBlack text-body4 leading-tight h-[60px] ${
-          review.hasSpoiler && 'blur-[5px]'
-        }`}
+      <div
+        className={`relative mt-[5px] text-theme-lightBlack text-body4 leading-tight h-[60px] pointer-events-none select-none`}
       >
-        {cutReviewText(review.reviewMainText)}
-      </p>
+        <p className={`${review.hasSpoiler && 'blur-[5px]'}`}>
+          {cutReviewText(review.reviewMainText)}
+        </p>
+        {review.hasSpoiler && (
+          <div className="absolute left-[280px] top-[20px] z-20 blur-none text-theme-main ">
+            스포일러 포함
+          </div>
+        )}
+      </div>
       <div className="mt-[5px] flex gap-[12px] text-theme-lightBlack text-body5">
         <div>{review.createdDate}</div>
         <div className="flex gap-[3px]">

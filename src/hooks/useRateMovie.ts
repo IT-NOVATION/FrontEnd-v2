@@ -9,7 +9,7 @@ export default function useRateMovie(prevScore: number, movieId: number) {
   useEffect(() => {
     setScore(prevScore);
     setScoreFixed(prevScore);
-  }, [score, scoreFixed]);
+  }, []);
   const queryClient = useQueryClient();
 
   const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
