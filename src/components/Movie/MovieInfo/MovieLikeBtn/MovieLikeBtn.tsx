@@ -1,12 +1,22 @@
+'use client';
+
 import HeartIcon from '@/ui/icons/HeartIcon';
 import HeartFillIcon from '@/ui/icons/HeartFillIcon';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { mutateMovieLike } from '@/service/movie';
+import { useParams } from 'next/navigation';
 type Props = {
   liked: boolean;
   likeCount: number;
 };
 export default function MovieLikeBtn({ liked, likeCount }: Props) {
-  const handleLikeClick = () => {
-    // 좋아요 서버 연동...
+  const queryClient = useQueryClient();
+  const { movieId } = useParams();
+  const data = { movieId: Number(movieId) };
+  const { mutateAsync } = useMutation(() => mutateMovieLike(data));
+  const handleLikeClick = async () => {
+    await mutateAsync();
+    await queryClient.invalidateQueries(['movie', `${movieId}`]);
   };
   return (
     <button
