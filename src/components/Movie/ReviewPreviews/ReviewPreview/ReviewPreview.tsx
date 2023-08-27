@@ -1,5 +1,6 @@
 import { IReviewAndUserInfo, IReviewPreview } from '@/interface/movie';
 import AuthorBox from './AuthorBox/AuthorBox';
+import ReviewInfoBox from './ReviewInfoBox/ReviewInfoBox';
 
 type Props = {
   reviewAndUser: IReviewAndUserInfo;
@@ -14,6 +15,7 @@ export default function ReviewPreview({ reviewAndUser, isLast }: Props) {
       } `}
     >
       <AuthorBox author={reviewAndUser.user} />
+      <ReviewInfoBox review={reviewAndUser.review} />
     </div>
   );
 }

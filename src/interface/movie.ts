@@ -31,21 +31,6 @@ export interface IReviewAndUserInfo {
   user: IReviewAuthor;
 }
 
-// export interface IReviewAndUserInfo {
-//   review: ISingleMoviePageReview;
-//   user: IUser;
-// }
-
-// export interface ISingleMoviePageReview {
-//   reviewId: number;
-//   hasSpoiler: boolean;
-//   reviewTitle: string;
-//   reviewMainText: string;
-//   createdDate: string;
-//   starScore: number;
-//   reviewLikeCount: number;
-// }
-
 export interface IReviewAuthor {
   userId: number;
   nickname?: string;
