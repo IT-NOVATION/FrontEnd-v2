@@ -9,7 +9,6 @@ type Props = {
     movieId: number;
   };
 };
-
 export default async function MoviePage({ params: { movieId } }: Props) {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery<ISingleMovie>(['movie', `${movieId}`], () =>

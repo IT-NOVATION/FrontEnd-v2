@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useLoginState from './useLoginState';
 import { rateMovie } from '@/service/movie';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function useRateMovie(prevScore: number, movieId: number) {
-  const [score, setScore] = useState(prevScore);
   const [scoreFixed, setScoreFixed] = useState(prevScore);
+  const [score, setScore] = useState(prevScore);
+  useEffect(() => {
+    setScore(prevScore);
+    setScoreFixed(prevScore);
+  }, [score, scoreFixed]);
   const queryClient = useQueryClient();
 
   const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
