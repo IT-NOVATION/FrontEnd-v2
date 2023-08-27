@@ -35,12 +35,12 @@ export default function MovieInfo({ movie, pushedMovieLike }: Props) {
   const { isHovered, handleHover, handleLeave } = useHovered();
   return (
     <>
-      <div
-        onMouseEnter={handleHover}
-        onMouseLeave={handleLeave}
-        className="w-[100vw] h-[450px] flex justify-center bg-black "
-      >
-        <div className="relative w-[1250px] h-[450px] flex items-center px-[70px] ">
+      <div className="w-[100vw] h-[450px] flex justify-center bg-black ">
+        <div
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
+          className="relative w-[1250px] h-[450px] flex items-center px-[70px] "
+        >
           <Image
             alt="배경포스터"
             src={movie.movieBgImg}
@@ -94,16 +94,16 @@ export default function MovieInfo({ movie, pushedMovieLike }: Props) {
                     <ul key={idx}># {translateKeyword(keyword)}</ul>
                   ))}
                 </ul>
-                {isHovered && (
-                  <section className="absolute right-[-400px] z-20 bottom-[40px] w-[300px] h-[136px] flex items-center rounded-[20px] border border-[#ffffff68] ">
-                    <p className="overflow-scroll h-[120px] p-[10px] text-body4 text-white mb-[10px]">
-                      {movie.movieDetail}
-                    </p>
-                  </section>
-                )}
               </div>
             </div>
           </section>
+          {isHovered && (
+            <section className="absolute right-[20px] z-20 bottom-[60px] w-[300px] h-[136px] flex items-center rounded-[20px] border border-[#ffffff68] ">
+              <p className="overflow-y-scroll overflow-x-hidden h-[120px] p-[10px] text-body4 text-white mb-[10px]">
+                {movie.movieDetail}
+              </p>
+            </section>
+          )}
         </div>
       </div>
     </>
