@@ -5,6 +5,7 @@ import { getMovieInfo } from '@/service/movie';
 import { useQuery } from '@tanstack/react-query';
 import MovieInfo from './MovieInfo/MovieInfo';
 import Rate from './Rate/Rate';
+import ReviewPreviews from './ReviewPreviews/ReviewPreviews';
 
 type Props = {
   movieId: number;
@@ -30,6 +31,9 @@ export default function Movie({ movieId }: Props) {
       )}
       {data?.loginUserInfoDto && (
         <Rate prevScore={data?.loginUserInfoDto.movieStar} />
+      )}
+      {data?.reviewAndUserInfoList && (
+        <ReviewPreviews reviewsAndUsers={data.reviewAndUserInfoList} />
       )}
     </>
   );

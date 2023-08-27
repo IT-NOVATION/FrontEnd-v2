@@ -1,7 +1,7 @@
 export interface ISingleMovie {
   movie: IMovieInformation;
   loginUserInfoDto: ILoginUserInfoDto;
-  reviewAndUserInfoList: { review: IReviewPreview; user: IUser }[];
+  reviewAndUserInfoList: IReviewAndUserInfo[];
 }
 
 export interface IMovieInformation {
@@ -27,21 +27,26 @@ export interface ILoginUserInfoDto {
 }
 
 export interface IReviewAndUserInfo {
-  review: ISingleMoviePageReview;
-  user: IUser;
+  review: IReviewPreview;
+  user: IReviewAuthor;
 }
 
-export interface ISingleMoviePageReview {
-  reviewId: number;
-  hasSpoiler: boolean;
-  reviewTitle: string;
-  reviewMainText: string;
-  createdDate: string;
-  starScore: number;
-  reviewLikeCount: number;
-}
+// export interface IReviewAndUserInfo {
+//   review: ISingleMoviePageReview;
+//   user: IUser;
+// }
 
-export interface IUser {
+// export interface ISingleMoviePageReview {
+//   reviewId: number;
+//   hasSpoiler: boolean;
+//   reviewTitle: string;
+//   reviewMainText: string;
+//   createdDate: string;
+//   starScore: number;
+//   reviewLikeCount: number;
+// }
+
+export interface IReviewAuthor {
   userId: number;
   nickname?: string;
   nickName?: string;
