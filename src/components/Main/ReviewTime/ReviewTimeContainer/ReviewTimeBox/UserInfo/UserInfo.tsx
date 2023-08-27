@@ -1,16 +1,33 @@
+import useLoginState from '@/hooks/useLoginState';
 import { IUserDetail } from '@/interface/user';
+import { mutateFollow } from '@/service/follow';
 import FollowBtn from '@/ui/buttons/FollowBtn';
+import FollowingBtn from '@/ui/buttons/FollowingBtn';
 import Badge from '@/ui/user/Badge/Badge';
 import ProfileImg from '@/ui/user/ProfileImg';
 import { cutIntroText } from '@/utils/cutIntroText';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type Props = {
   user: IUserDetail;
   isFollowing: boolean;
 };
 export default function UserInfo({ user, isFollowing }: Props) {
-  const { profileImg, nickName, introduction, followers, followings } = user;
-  const handleClick = () => {};
+  const { profileImg, nickName, introduction, followers, followings, userId } =
+    user;
+  const {
+    state: { userId: loginUserId },
+  } = useLoginState();
+  const { mutateAsync } = useMutation((data: { targetUserId: number }) =>
+    mutateFollow(data)
+  );
+  const queryClient = useQueryClient();
+  const handleClick = async () => {
+    const data = { targetUserId: userId };
+    await mutateAsync(data);
+    await queryClient.invalidateQueries(['reviewTime']);
+  };
+
   return (
     <div className="w-[200px] ml-[30px] flex flex-col items-center">
       <div className="relative w-[131px] h-[131px] mb-[10px] rounded-full">
@@ -37,7 +54,13 @@ export default function UserInfo({ user, isFollowing }: Props) {
           </span>
         </div>
       </div>
-      <FollowBtn onClick={handleClick} className="mt-[40px]" />
+      <div className="mt-[40px]">
+        {isFollowing ? (
+          <FollowingBtn onClick={handleClick} />
+        ) : (
+          userId !== loginUserId && <FollowBtn onClick={handleClick} />
+        )}
+      </div>
     </div>
   );
 }

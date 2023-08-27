@@ -19,6 +19,7 @@ export const getReviewTime = () =>
     .then((data) =>
       data.map((v: any) => ({
         user: {
+          userId: v.userId,
           profileImg: v.profileImg,
           nickName: v.nickName,
           introduction: v.introduction,
