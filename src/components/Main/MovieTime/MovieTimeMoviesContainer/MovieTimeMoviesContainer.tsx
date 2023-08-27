@@ -53,7 +53,7 @@ export default function MovieTimeMoviesContainer() {
       <div className="relative">
         <button
           onClick={handlePrevClick}
-          className="absolute top-[105px] left-[-50px]"
+          className="absolute top-[110px] left-[-50px]"
         >
           <LeftArrowIcon />
         </button>
