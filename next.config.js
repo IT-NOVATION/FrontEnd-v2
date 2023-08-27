@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'd1yzu8dcirp0jm.cloudfront.net',
       },
+      {
+        protocol: 'http',
+        hostname: 'k.kakaocdn.net',
+      },
     ],
   },
 };

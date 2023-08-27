@@ -5,7 +5,7 @@ export const getAccessTokenHeader = () => {
     const accessToken = localStorage.getItem('accessToken');
     return {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken || ''}`,
     };
   }
   return {

@@ -48,7 +48,7 @@ export default function AccountModal() {
           <>
             <div
               onClick={handleExit}
-              className="fixed top-0 left-0 flex flex-col justify-center items-center w-[100vw] h-[100vh] z-20 bg-[#0000004d]"
+              className="fixed top-0 left-0 flex flex-col justify-center items-center w-[100vw] h-[100vh] z-[30] bg-[#0000004d]"
             />
             <motion.section
               className="w-[629px] h-[100vh] fixed right-0 bg-white pl-[84px] z-50"

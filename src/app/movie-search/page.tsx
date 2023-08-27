@@ -14,7 +14,7 @@ export default async function MovieSearchPage() {
   );
   const dehydratedState = dehydrate(queryClient);
   return (
-    <div className="w-[900px] mx-auto flex flex-col">
+    <div className="w-[900px] mx-auto flex flex-col pt-[70px]">
       <h1 className="text-[#5f5f5f] text-[64px] font-[500] mt-[15px]">
         무비서치
       </h1>
