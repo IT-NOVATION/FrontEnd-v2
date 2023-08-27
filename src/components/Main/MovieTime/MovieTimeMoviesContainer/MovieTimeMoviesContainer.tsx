@@ -21,7 +21,6 @@ export default function MovieTimeMoviesContainer() {
     setPage([0, 0]);
   };
   const {
-    variants,
     page,
     direction,
     animate,

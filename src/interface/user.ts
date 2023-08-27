@@ -10,9 +10,4 @@ export interface IUserDetail extends IUserBase {
   followings: number;
 }
 
-export enum Grade {
-  'STANDARD',
-  'PREMIUM',
-  'VIP',
-  'SPECIAL',
-}
+export type Grade = 'STANDARD' | 'PREMIUM' | 'VIP' | 'SPECIAL';

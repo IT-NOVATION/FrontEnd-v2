@@ -38,7 +38,7 @@ export default function ReviewTimeContainer() {
           exit="exit"
           transition={{ type: 'linear', duration: animate ? 0.5 : 0 }}
         >
-          <ReviewTimeBox />
+          {data && <ReviewTimeBox data={data[Math.abs(page % data.length)]} />}
         </motion.div>
       </AnimatePresence>
       <button

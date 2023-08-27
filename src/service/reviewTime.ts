@@ -24,8 +24,9 @@ export const getReviewTime = () =>
           introduction: v.introduction,
           grade: v.grade,
           followers: v.followers,
-          followings: v.following,
+          followings: v.followings,
         },
         isLoginUserFollowing: v.isLoginedUserFollowsNowUser,
+        reviews: v.reviews,
       }))
     );
