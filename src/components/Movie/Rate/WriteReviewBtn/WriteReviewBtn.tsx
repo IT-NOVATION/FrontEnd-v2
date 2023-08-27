@@ -1,22 +1,18 @@
 'use client';
 
 import useLoginState from '@/hooks/useLoginState';
-import { modalStateAtom } from '@/recoil/accountModalAtom';
 import BrushIcon from '@/ui/icons/BrushIcon';
 import { useParams, useRouter } from 'next/navigation';
-import { useSetRecoilState } from 'recoil';
 
 export default function WriteReviewBtn() {
   const { movieId } = useParams();
-  const { loginState } = useLoginState();
-  const setModalState = useSetRecoilState(modalStateAtom);
+  const { checkAuth } = useLoginState();
   const router = useRouter();
   const handleClick = () => {
-    if (loginState) {
-      router.push(`/write-review/${movieId}`);
-    } else {
-      setModalState(1);
+    if (!checkAuth()) {
+      return;
     }
+    router.push(`/write-review/${movieId}`);
   };
   return (
     <button

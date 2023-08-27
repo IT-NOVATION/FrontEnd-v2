@@ -5,16 +5,21 @@ import HeartFillIcon from '@/ui/icons/HeartFillIcon';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { mutateMovieLike } from '@/service/movie';
 import { useParams } from 'next/navigation';
+import useLoginState from '@/hooks/useLoginState';
 type Props = {
   liked: boolean;
   likeCount: number;
 };
 export default function MovieLikeBtn({ liked, likeCount }: Props) {
   const queryClient = useQueryClient();
+  const { checkAuth } = useLoginState();
   const { movieId } = useParams();
   const data = { movieId: Number(movieId) };
   const { mutateAsync } = useMutation(() => mutateMovieLike(data));
   const handleLikeClick = async () => {
+    if (!checkAuth()) {
+      return;
+    }
     await mutateAsync();
     await queryClient.invalidateQueries(['movie', `${movieId}`]);
   };

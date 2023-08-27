@@ -34,7 +34,9 @@ export default function NavigationBar() {
   const handleLoginClick = () => {
     setModalState(ModalState.LoginForm);
   };
-  const { loginState, userId, profileImg } = useLoginState();
+  const {
+    state: { loginState, userId, profileImg },
+  } = useLoginState();
   const [isSearching, setIsSearching] = useState(false);
   const handleSearchClick = () => {
     setIsSearching(true);

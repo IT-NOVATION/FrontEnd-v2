@@ -28,7 +28,7 @@ export default function Movie({ movieId }: Props) {
           </p>
         </section>
       )}
-      {data?.loginUserInfoDto.movieStar && (
+      {data?.loginUserInfoDto && (
         <Rate prevScore={data?.loginUserInfoDto.movieStar} />
       )}
     </>

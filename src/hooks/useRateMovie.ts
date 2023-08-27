@@ -1,23 +1,20 @@
-import { modalStateAtom } from '@/recoil/accountModalAtom';
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import useLoginState from './useLoginState';
 import { rateMovie } from '@/service/movie';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function useRateMovie(prevScore: number, movieId: number) {
-  const queryClient = useQueryClient();
   const [score, setScore] = useState(prevScore);
   const [scoreFixed, setScoreFixed] = useState(prevScore);
+  const queryClient = useQueryClient();
 
   const handleLeftHalfEnter = (idx: number) => setScore(idx + 0.5);
   const handleRightHalfEnter = (idx: number) => setScore(idx + 1);
-  const { loginState } = useLoginState();
-  const setModalState = useSetRecoilState(modalStateAtom);
+  const { checkAuth } = useLoginState();
 
   const handleStarClick = async () => {
-    if (loginState === false) {
-      setModalState(1);
+    if (!checkAuth()) {
+      return;
     } else {
       setScoreFixed(score);
     }
