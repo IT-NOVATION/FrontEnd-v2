@@ -17,7 +17,7 @@ export default async function MoviePage({ params: { movieId } }: Props) {
   );
   const dehydratedState = dehydrate(queryClient);
   return (
-    <div className="w-[900px] flex flex-col pt-[90px]">
+    <div className="w-[100vw] flex flex-col pt-[90px]">
       <Hydrate state={dehydratedState}>
         <Movie movieId={movieId} />
       </Hydrate>
