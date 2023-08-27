@@ -8,43 +8,18 @@ import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
 import ReviewTimeBox from './ReviewTimeBox/ReviewTimeBox';
 import { useState } from 'react';
+import useSliderAnimation from '@/hooks/useSliderAnimation';
 
 export default function ReviewTimeContainer() {
   const { data } = useQuery<IReviewTime[]>(['reviewTime'], getReviewTime);
-  const variants = {
-    enter: ({ direction }: { direction: number }) => {
-      return {
-        x: direction > 0 ? 1000 : -1000,
-        opacity: 0,
-      };
-    },
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: ({ direction, animate }: { direction: number; animate: boolean }) => {
-      return {
-        x: direction < 0 ? 1000 : -1000,
-        opacity: 0,
-        transition: {
-          duration: animate ? 0.5 : 0,
-        },
-      };
-    },
-  };
-  const [[page, direction], setPage] = useState([0, 0]);
-  const [animate, setAnimate] = useState(false);
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-    setAnimate(true);
-  };
-  const handleNextClick = () => {
-    paginate(1);
-  };
-  const handlePrevClick = () => {
-    paginate(-1);
-  };
+  const {
+    variants,
+    page,
+    direction,
+    animate,
+    handleNextClick,
+    handlePrevClick,
+  } = useSliderAnimation();
   return (
     <div className="relative mt-[50px] mb-[200px]">
       <button

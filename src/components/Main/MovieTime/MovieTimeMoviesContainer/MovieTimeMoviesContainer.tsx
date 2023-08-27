@@ -7,29 +7,29 @@ import { useState } from 'react';
 import MovieTimeMovies from './MovieTimeMovies/MovieTimeMovies';
 import LeftArrowIcon from '@/ui/icons/LeftArrowIcon';
 import RightArrowIcon from '@/ui/icons/RightArrowIcon';
+import useSliderAnimation from '@/hooks/useSliderAnimation';
 
 export type ContentsType = 'popular' | 'recommended';
 
 export default function MovieTimeMoviesContainer() {
   const { data } = useQuery<IMovieTime>(['movieTime'], getMovieTime);
   const [contentsType, setContentsType] = useState<ContentsType>('popular');
-  const [[page, direction], setPage] = useState([0, 0]);
-  const [animate, setAnimate] = useState(false);
+
   const handleContentClick = (selected: ContentsType) => {
     setContentsType(selected);
     setAnimate(false);
     setPage([0, 0]);
   };
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-    setAnimate(true);
-  };
-  const handleNextClick = () => {
-    paginate(1);
-  };
-  const handlePrevClick = () => {
-    paginate(-1);
-  };
+  const {
+    variants,
+    page,
+    direction,
+    animate,
+    handleNextClick,
+    handlePrevClick,
+    setAnimate,
+    setPage,
+  } = useSliderAnimation();
   return (
     <div>
       <div className="flex justify-center gap-[90px] my-[40px]">

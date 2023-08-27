@@ -3,6 +3,7 @@
 import { IMovieTimeMovie } from '@/interface/movieTime';
 import MovieTimeMovie from './MovieTimeMovie/MovieTimeMovie';
 import { AnimatePresence, motion } from 'framer-motion';
+import useSliderAnimation from '@/hooks/useSliderAnimation';
 
 type Props = {
   movies: IMovieTimeMovie[];
@@ -17,34 +18,7 @@ export default function MovieTimeMovies({
   direction,
   animate,
 }: Props) {
-  const variants = {
-    enter: ({
-      direction,
-      animate,
-    }: {
-      direction: number;
-      animate: boolean;
-    }) => {
-      return {
-        x: animate ? (direction > 0 ? 1000 : -1000) : 0,
-        opacity: animate ? 0 : 1,
-      };
-    },
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: ({ direction, animate }: { direction: number; animate: boolean }) => {
-      return {
-        x: animate && direction < 0 ? 1000 : -1000,
-        opacity: 0,
-        transition: {
-          duration: animate ? 0.5 : 0,
-        },
-      };
-    },
-  };
+  const { variants } = useSliderAnimation();
   return (
     <AnimatePresence
       custom={{ direction, animate }}
