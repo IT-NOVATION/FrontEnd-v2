@@ -1,5 +1,10 @@
 import { ISimpleMovie } from './movie';
 
+export interface ISimpleReview {
+  reviewId: number;
+  reviewTitle: string;
+}
+
 export interface IReviewPreview {
   reviewId: number;
   reviewTitle: string;
