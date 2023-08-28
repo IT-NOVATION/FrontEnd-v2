@@ -4,6 +4,11 @@ export interface ISingleMovie {
   reviewAndUserInfoList: IReviewAndUserInfo[];
 }
 
+export interface ISimpleMovie {
+  movieId: number;
+  movieImg: string;
+}
+
 export interface IMovieInformation {
   movieImg: string;
   title: string;

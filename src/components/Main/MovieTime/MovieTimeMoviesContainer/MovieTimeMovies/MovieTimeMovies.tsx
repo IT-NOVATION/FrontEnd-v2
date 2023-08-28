@@ -3,6 +3,8 @@
 import { IMovieTimeMovie } from '@/interface/movieTime';
 import MovieTimeMovie from './MovieTimeMovie/MovieTimeMovie';
 import { AnimatePresence, motion } from 'framer-motion';
+import useSliderAnimation from '@/hooks/useSliderAnimation';
+import useHovered from '@/hooks/useHovered';
 
 type Props = {
   movies: IMovieTimeMovie[];
@@ -17,34 +19,7 @@ export default function MovieTimeMovies({
   direction,
   animate,
 }: Props) {
-  const variants = {
-    enter: ({
-      direction,
-      animate,
-    }: {
-      direction: number;
-      animate: boolean;
-    }) => {
-      return {
-        x: animate ? (direction > 0 ? 1000 : -1000) : 0,
-        opacity: animate ? 0 : 1,
-      };
-    },
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: ({ direction, animate }: { direction: number; animate: boolean }) => {
-      return {
-        x: animate && direction < 0 ? 1000 : -1000,
-        opacity: 0,
-        transition: {
-          duration: animate ? 0.5 : 0,
-        },
-      };
-    },
-  };
+  const { variants } = useSliderAnimation();
   return (
     <AnimatePresence
       custom={{ direction, animate }}
@@ -64,15 +39,11 @@ export default function MovieTimeMovies({
         {movies
           .slice(Math.abs(page % 2) * 5, Math.abs(page % 2) * 5 + 5)
           .map((movie, idx) => (
-            <li
+            <MovieTimeMovie
               key={movie.movieId}
-              className="relative w-[205px] h-[292px] rounded-[10px]"
-            >
-              <MovieTimeMovie
-                rank={Math.abs(page % 2) * 5 + idx + 1}
-                movie={movie}
-              />
-            </li>
+              rank={Math.abs(page % 2) * 5 + idx + 1}
+              movie={movie}
+            />
           ))}
       </motion.ul>
     </AnimatePresence>
