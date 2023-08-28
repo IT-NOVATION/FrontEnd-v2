@@ -19,6 +19,6 @@ export interface IMovieTalkUser extends IUserBase {
   profileImg: string;
   introduction?: string;
   isMyProfile: boolean;
-  isLoginUserFollwing: boolean;
-  reviews: (ISimpleReview & ISimpleMovie)[];
+  isLoginUserFollowing: boolean;
+  reviews: (ISimpleReview & { movie: ISimpleMovie })[];
 }

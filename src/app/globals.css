@@ -12,3 +12,7 @@ body {
 input {
   outline: none;
 }
+
+button:hover {
+  scale: 102%;
+}

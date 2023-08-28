@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import BestReviews from './BestReviews/BestReviews';
-import LatestReviews from './LatestReviews/LatestReviews';
-import PopularUsers from './PopularUsers/PopularUsers';
+import Users from './Users/Users';
 
 export type MovieTalkContentsType =
   | 'bestReviews'
@@ -22,21 +20,23 @@ export default function MovieTalk() {
     setContent(type);
   };
   return (
-    <div>
-      <ul>
+    <div className="mt-[25px] mb-[40px]">
+      <ul className="flex gap-[90px]">
         {buttons.map(({ type, name }, i) => (
           <li key={name}>
-            <button onClick={() => handleClick(type)}>{name}</button>
+            <button
+              className={`text-body1 text-theme-lightBlack pb-[2px] ${
+                content === type &&
+                'text-theme-main text-title5 border-b border-theme-main'
+              }`}
+              onClick={() => handleClick(type)}
+            >
+              {name}
+            </button>
           </li>
         ))}
       </ul>
-      {content === 'bestReviews' ? (
-        <BestReviews />
-      ) : content === 'latestReviews' ? (
-        <LatestReviews />
-      ) : (
-        <PopularUsers />
-      )}
+      <Users content={content} />
     </div>
   );
 }
