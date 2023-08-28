@@ -1,8 +1,8 @@
-import { IReviewPreview } from './movie';
+import { IReviewPreview } from './review';
 import { IUserDetail } from './user';
 
 export interface IReviewTime {
   user: IUserDetail;
-  reviews: IReviewPreview;
+  reviews: IReviewPreview[];
   isLoginUserFollowing: boolean;
 }

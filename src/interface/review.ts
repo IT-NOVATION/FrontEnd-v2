@@ -1,3 +1,5 @@
+import { ISimpleMovie } from './movie';
+
 export interface IReviewPreview {
   reviewId: number;
   reviewTitle: string;
@@ -7,8 +9,5 @@ export interface IReviewPreview {
   reviewLikeCount: number;
   hasSpoiler: boolean;
   commentCount: number;
-  movie: {
-    movieId: number;
-    movieImg: string;
-  };
+  movie: ISimpleMovie;
 }

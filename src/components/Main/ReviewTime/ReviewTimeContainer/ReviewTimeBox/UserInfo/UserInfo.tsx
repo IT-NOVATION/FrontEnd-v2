@@ -29,7 +29,7 @@ export default function UserInfo({ user, isFollowing }: Props) {
   };
 
   return (
-    <div className="w-[200px] ml-[30px] flex flex-col items-center">
+    <div className="w-[200px] h-full ml-[30px] flex flex-col justify-center items-center">
       <div className="relative w-[131px] h-[131px] mb-[10px] rounded-full">
         <ProfileImg src={profileImg} />
       </div>
