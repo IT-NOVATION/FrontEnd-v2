@@ -1,3 +1,4 @@
+import useFollowBtn from '@/hooks/useFollowBtn';
 import useLoginState from '@/hooks/useLoginState';
 import { IUserDetail } from '@/interface/user';
 import { mutateFollow } from '@/service/follow';
@@ -18,15 +19,7 @@ export default function UserInfo({ user, isFollowing }: Props) {
   const {
     state: { userId: loginUserId },
   } = useLoginState();
-  const { mutateAsync } = useMutation((data: { targetUserId: number }) =>
-    mutateFollow(data)
-  );
-  const queryClient = useQueryClient();
-  const handleClick = async () => {
-    const data = { targetUserId: userId };
-    await mutateAsync(data);
-    await queryClient.invalidateQueries(['reviewTime']);
-  };
+  const { handleClick } = useFollowBtn(userId, ['reviewTime']);
 
   return (
     <div className="w-[200px] h-full ml-[30px] flex flex-col justify-center items-center">

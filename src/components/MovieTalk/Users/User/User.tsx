@@ -4,6 +4,7 @@ import FollowingBtn from '@/ui/buttons/FollowingBtn';
 import ProfileImg from '@/ui/user/ProfileImg';
 import Link from 'next/link';
 import Image from 'next/image';
+import useFollowBtn from '@/hooks/useFollowBtn';
 
 type Props = {
   user: IMovieTalkUser;
@@ -11,10 +12,7 @@ type Props = {
 };
 
 export default function User({ user, isLast }: Props) {
-  const handleClick = () => {
-    //follow api...
-  };
-  console.log(user.reviews[0]);
+  const { handleClick } = useFollowBtn(user.userId, ['movieTalk']);
   return (
     <li
       className={`w-full h-[205px] flex items-center gap-[60px] ${
@@ -41,9 +39,12 @@ export default function User({ user, isLast }: Props) {
           </p>
         </div>
       </section>
-      <section className="flex gap-[40px] hover:scale-[102%]">
+      <section className="flex gap-[40px]">
         {user.reviews.slice(0, 2).map((review) => (
-          <div key={review.reviewId} className="w-[176px] flex flex-col">
+          <div
+            key={review.reviewId}
+            className="w-[176px] flex flex-col  hover:scale-[102%]"
+          >
             <Image
               src={review.movie.movieImg}
               alt="포스터"
