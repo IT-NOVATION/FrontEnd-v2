@@ -8,6 +8,8 @@ import { IWriteReviewMovie } from '@/interface/movie';
 import Image from 'next/image';
 import Rate from '@/components/WriteReview/Rate/Rate';
 import Keywords from '@/components/WriteReview/Keywords/Keywords';
+import ReviewEditor from '@/components/WriteReview/ReviewEditor/ReviewEditor';
+import EditorComponent from '@/components/WriteReview/ReviewEditor/Quill';
 type Params = {
   params: {
     movieId: number;
@@ -22,7 +24,7 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
   );
   console.log(methods.watch());
   return (
-    <div className="pt-[50px] flex flex-col items-center">
+    <div className="flex flex-col items-center">
       {movie && (
         <FormProvider {...methods}>
           <form>
@@ -41,6 +43,7 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
                   <Keywords />
                 </div>
               </div>
+              <EditorComponent />
             </section>
           </form>
         </FormProvider>
