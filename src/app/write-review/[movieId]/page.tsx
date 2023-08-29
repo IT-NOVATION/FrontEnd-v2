@@ -46,7 +46,7 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
                 </div>
               </div>
               <EditorComponent />
-              <div className="mt-[60px] w-[900px] justify-end flex gap-[30px]">
+              <div className="mt-[60px] w-[900px] justify-end flex gap-[32px]">
                 <WatchDateSelect />
                 <SpoilerCheckbox />
               </div>
