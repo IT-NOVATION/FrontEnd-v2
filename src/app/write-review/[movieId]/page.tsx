@@ -8,8 +8,10 @@ import { IWriteReviewMovie } from '@/interface/movie';
 import Image from 'next/image';
 import Rate from '@/components/WriteReview/Rate/Rate';
 import Keywords from '@/components/WriteReview/Keywords/Keywords';
-import ReviewEditor from '@/components/WriteReview/ReviewEditor/ReviewEditor';
 import EditorComponent from '@/components/WriteReview/ReviewEditor/Quill';
+import SpoilerCheckbox from '@/components/WriteReview/SpoilerCheckbox/SpoilerCheckbox';
+import WatchDateSelect from '@/components/WriteReview/WatchDateSelect/WatchDateSelect';
+
 type Params = {
   params: {
     movieId: number;
@@ -29,7 +31,7 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
         <FormProvider {...methods}>
           <form>
             <TitleInput movie={movie} />
-            <section className="w-full flex flex-col items-center ">
+            <section className={`w-full flex flex-col items-center`}>
               <div className="flex mt-[40px] gap-[25px] w-[900px] ">
                 <Image
                   src={movie.movieImg}
@@ -44,6 +46,10 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
                 </div>
               </div>
               <EditorComponent />
+              <div className="mt-[60px] w-[900px] justify-end flex gap-[30px]">
+                <WatchDateSelect />
+                <SpoilerCheckbox />
+              </div>
             </section>
           </form>
         </FormProvider>
