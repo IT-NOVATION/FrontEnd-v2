@@ -1,3 +1,4 @@
+import { IMutateReview } from '@/interface/review';
 import { getRefreshedTokens, getLoginState } from './account';
 import { SERVER_URI, getAccessTokenHeader } from './instance';
 
@@ -16,7 +17,7 @@ export const writeReviewMovieInfo = (movieId: number) =>
     return res.json();
   });
 
-export const mutateReview = (data: { targetUserId: number }) =>
+export const mutateReview = (data: IMutateReview) =>
   fetch(`${SERVER_URI}${MUTATE_REVIEW_URI}`, {
     method: 'POST',
     headers: getAccessTokenHeader(),
