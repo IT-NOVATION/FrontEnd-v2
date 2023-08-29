@@ -3,7 +3,7 @@ import useLoginState from './useLoginState';
 import { rateMovie } from '@/service/movie';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export default function useRateMovie(prevScore: number, movieId: number) {
+export default function useRateMovie(prevScore: number, movieId?: number) {
   const [scoreFixed, setScoreFixed] = useState(prevScore);
   const [score, setScore] = useState(prevScore);
   useEffect(() => {
