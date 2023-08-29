@@ -27,7 +27,7 @@ export default function Rate({ prevScore }: Props) {
     if (scoreFixed) handleRate();
   }, [scoreFixed]);
   return (
-    <section className="w-[100vw] flex justify-center mt-[11px]">
+    <section className="w-[100vw] flex justify-center mt-[11px] ">
       <div className="relative w-[882px] h-[91px] rounded-[13px] border border-[#9a9a9abf] flex gap-[2px] items-center justify-center">
         {Array(5)
           .fill(0)
