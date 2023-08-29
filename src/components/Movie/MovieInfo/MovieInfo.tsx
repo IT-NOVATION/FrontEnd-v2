@@ -1,6 +1,6 @@
 'use client';
 
-import { IMovieInformation } from '@/interface/movie';
+import { IMovieDetail } from '@/interface/movie';
 import Image from 'next/image';
 import MovieLikeBtn from './MovieLikeBtn/MovieLikeBtn';
 import StarIcon from '@/ui/icons/StarIcon';
@@ -8,7 +8,7 @@ import { translateKeyword } from '../../../utils/translateKeyword';
 import useHovered from '@/hooks/useHovered';
 
 type Props = {
-  movie: IMovieInformation;
+  movie: IMovieDetail;
   pushedMovieLike: boolean;
 };
 

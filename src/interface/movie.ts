@@ -1,5 +1,5 @@
 export interface ISingleMovie {
-  movie: IMovieInformation;
+  movie: IMovieDetail;
   loginUserInfoDto: ILoginUserInfoDto;
   reviewAndUserInfoList: IReviewAndUserInfo[];
 }
@@ -9,7 +9,12 @@ export interface ISimpleMovie {
   movieImg: string;
 }
 
-export interface IMovieInformation {
+export interface IWriteReviewMovie extends ISimpleMovie {
+  title: string;
+  releaseDate: string;
+}
+
+export interface IMovieDetail {
   movieImg: string;
   title: string;
   movieBgImg: string;
