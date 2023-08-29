@@ -12,7 +12,7 @@ type Props = {
 export default function MovieSearchMovie({ movie, rank }: Props) {
   return (
     <Link href={`/movie/${movie.movieId}`}>
-      <div className="w-[205px] relative mb-[5px]">
+      <div className="w-[205px] relative mb-[5px] hover:scale-[102%]">
         <div className="shadow-xl">
           <Image
             src={movie.movieImg}
