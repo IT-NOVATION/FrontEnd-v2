@@ -2,7 +2,7 @@
 
 import { mutateReview, writeReviewMovieInfo } from '@/service/writeReview';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FieldErrors, FormProvider, useForm } from 'react-hook-form';
 import TitleInput from '@/components/WriteReview/TitleInput/TitleInput';
 import { IWriteReviewMovie } from '@/interface/movie';
 import Image from 'next/image';
@@ -32,11 +32,25 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
   const onValid = async (data: IMutateReview) => {
     await mutateAsync({ ...data, movieId: movieId });
   };
+  const onInvalid = ({
+    reviewTitle,
+    reviewMainText,
+    star,
+  }: FieldErrors<IMutateReview>) => {
+    if (reviewTitle) {
+      console.log(reviewTitle);
+      alert(reviewTitle.message);
+    } else if (star) {
+      alert(star.message);
+    } else if (reviewMainText) {
+      alert(reviewMainText.message);
+    }
+  };
   return (
     <div className="flex flex-col items-center">
       {movie && (
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onValid)}>
+          <form onSubmit={methods.handleSubmit(onValid, onInvalid)}>
             <TitleInput movie={movie} />
             <section className={`w-full flex flex-col items-center`}>
               <div className="flex mt-[40px] gap-[25px] w-[900px] ">

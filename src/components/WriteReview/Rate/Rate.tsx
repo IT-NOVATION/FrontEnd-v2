@@ -1,12 +1,15 @@
 import useRateMovie from '@/hooks/useRateMovie';
 import HalfStarFillIcon from '@/ui/icons/HalfStarFillIcon';
 import StarFillIcon from '@/ui/icons/StarFillcon';
+import { watch } from 'fs';
 import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 export default function Rate() {
   const { register, setValue } = useFormContext();
-  register('star');
+  register('star', {
+    min: { value: 0.5, message: '별점을 매겨주세요' },
+  });
   const {
     score,
     handleLeftHalfEnter,

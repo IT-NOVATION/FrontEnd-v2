@@ -11,7 +11,7 @@ Quill.register('modules/ImageResize', ImageResize);
 
 export default function ReviewEditor() {
   const { register, setValue: setMainTextValue } = useFormContext();
-  register('reviewMainText');
+  register('reviewMainText', { required: '내용을 입력해주세요' });
   const quillRef = useRef(null);
   const [value, setValue] = useState('');
 
