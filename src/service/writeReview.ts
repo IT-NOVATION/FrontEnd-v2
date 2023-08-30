@@ -26,5 +26,5 @@ export const mutateReview = (data: IMutateReview) =>
     if (!res.ok) {
       throw new Error(`${res.status} 에러 발생`);
     }
-    return res;
+    return res.json();
   });

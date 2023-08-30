@@ -12,6 +12,10 @@ import EditorComponent from '@/components/WriteReview/ReviewEditor/Quill';
 import SpoilerCheckbox from '@/components/WriteReview/SpoilerCheckbox/SpoilerCheckbox';
 import WatchDateSelect from '@/components/WriteReview/WatchDateSelect/WatchDateSelect';
 import { IMutateReview } from '@/interface/review';
+import { useState } from 'react';
+import CancelModal from '@/components/WriteReview/CancelModal/CancelModal';
+import SaveModal from '@/components/WriteReview/SaveModal/SaveModal';
+import { useRouter } from 'next/navigation';
 
 type Params = {
   params: {
@@ -20,7 +24,28 @@ type Params = {
 };
 
 export default function WriteReviewPage({ params: { movieId } }: Params) {
+  const router = useRouter();
   const methods = useForm<IMutateReview>();
+  const [openCancelModal, setOpenCancelModal] = useState(false);
+  const [openSaveModal, setOpenSaveModal] = useState(false);
+  const [reviewId, setReviewId] = useState<null | number>(null);
+  const handelCancelCick = () => {
+    document.body.style.overflowY = 'hidden';
+    setOpenCancelModal(true);
+  };
+  const handleCancelModalClose = () => {
+    document.body.style.overflowY = 'scroll';
+    setOpenCancelModal(false);
+  };
+  const handleSaveClick = () => {
+    document.body.style.overflowY = 'hidden';
+    setOpenSaveModal(true);
+  };
+  const handleSaveModalClose = () => {
+    document.body.style.overflowY = 'scroll';
+    setOpenSaveModal(false);
+    router.push(`/review/${reviewId}`);
+  };
   const { data: movie } = useQuery<IWriteReviewMovie>(
     ['writeReview', `${movieId}`],
     () => writeReviewMovieInfo(movieId)
@@ -30,7 +55,10 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
   );
 
   const onValid = async (data: IMutateReview) => {
-    await mutateAsync({ ...data, movieId: movieId });
+    const res = await mutateAsync({ ...data, movieId: movieId });
+    console.log(res);
+    setReviewId(res);
+    handleSaveClick();
   };
   const onInvalid = ({
     reviewTitle,
@@ -38,7 +66,6 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
     star,
   }: FieldErrors<IMutateReview>) => {
     if (reviewTitle) {
-      console.log(reviewTitle);
       alert(reviewTitle.message);
     } else if (star) {
       alert(star.message);
@@ -46,6 +73,7 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
       alert(reviewMainText.message);
     }
   };
+
   return (
     <div className="flex flex-col items-center">
       {movie && (
@@ -75,12 +103,14 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
                 <button
                   type="button"
                   className="w-[310px] h-[41px] rounded-[5px] border border-theme-darkGray text-body4"
+                  onClick={handelCancelCick}
                 >
                   취소
                 </button>
                 <button
-                  type="submit"
+                  type="button"
                   className="w-[580px] h-[41px] rounded-[5px] bg-theme-main text-body4 text-white"
+                  onClick={methods.handleSubmit(onValid, onInvalid)}
                 >
                   저장
                 </button>
@@ -89,6 +119,8 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
           </form>
         </FormProvider>
       )}
+      {openCancelModal && <CancelModal onClose={handleCancelModalClose} />}
+      {openSaveModal && <SaveModal onClose={handleSaveModalClose} />}
     </div>
   );
 }

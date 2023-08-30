@@ -1,7 +1,6 @@
 import useRateMovie from '@/hooks/useRateMovie';
 import HalfStarFillIcon from '@/ui/icons/HalfStarFillIcon';
 import StarFillIcon from '@/ui/icons/StarFillcon';
-import { watch } from 'fs';
 import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 

@@ -27,6 +27,7 @@ export default function RootLayout({
             </CookieProviderContext>
           </QueryClientContext>
         </RecoilRootContext>
+        <div id="portal" />
       </body>
     </html>
   );
