@@ -46,10 +46,18 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
     setOpenSaveModal(false);
     router.push(`/review/${reviewId}`);
   };
-  const { data: movie } = useQuery<IWriteReviewMovie>(
+  const handleError = () => {
+    alert('이미 리뷰를 작성한 영화입니다');
+    router.back();
+  };
+  const { data: movie, isError } = useQuery<IWriteReviewMovie>(
     ['writeReview', `${movieId}`],
-    () => writeReviewMovieInfo(movieId)
+    () => writeReviewMovieInfo(movieId),
+    {
+      retry: 1,
+    }
   );
+  isError && handleError();
   const { mutateAsync } = useMutation((data: IMutateReview) =>
     mutateReview(data)
   );
