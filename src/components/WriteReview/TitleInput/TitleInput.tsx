@@ -24,6 +24,7 @@ export default function TitleInput({ movie }: Props) {
           className="w-full h-[60px] bg-inherit text-[50px] font-[300]"
           type="text"
           placeholder="리뷰 제목"
+          autoComplete="off"
         />
         <div className="flex gap-[30px] mt-[30px] text-body3 text-theme-darkGray">
           <span>{title}</span>

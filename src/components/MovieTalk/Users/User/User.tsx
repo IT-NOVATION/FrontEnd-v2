@@ -31,7 +31,7 @@ export default function User({ user, isLast }: Props) {
             {user.isLoginUserFollowing ? (
               <FollowingBtn onClick={handleClick} />
             ) : (
-              <FollowBtn onClick={handleClick} />
+              !user.isMyProfile && <FollowBtn onClick={handleClick} />
             )}
           </div>
           <p className="flex flex-wrap text-theme-lightBlack text-body3">
