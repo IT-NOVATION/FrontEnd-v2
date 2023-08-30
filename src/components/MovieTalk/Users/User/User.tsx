@@ -52,7 +52,7 @@ export default function User({ user, isLast }: Props) {
               height={110}
               className="w-[176px] h-[105px] object-cover rounded-[10px]"
             />
-            <Link href={`/movie/${review.movie.movieId}`}>
+            <Link href={`/movie/${review.reviewId}`}>
               <p className="w-full mt-[8px] flex justify-center text-body3 text-lightBlack">
                 {review.reviewTitle}
               </p>
