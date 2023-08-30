@@ -31,7 +31,7 @@ export default function User({ user, isLast }: Props) {
             {user.isLoginUserFollowing ? (
               <FollowingBtn onClick={handleClick} />
             ) : (
-              <FollowBtn onClick={handleClick} />
+              !user.isMyProfile && <FollowBtn onClick={handleClick} />
             )}
           </div>
           <p className="flex flex-wrap text-theme-lightBlack text-body3">
@@ -45,14 +45,14 @@ export default function User({ user, isLast }: Props) {
             key={review.reviewId}
             className="w-[176px] flex flex-col  hover:scale-[102%]"
           >
-            <Image
-              src={review.movie.movieImg}
-              alt="포스터"
-              width={180}
-              height={110}
-              className="w-[176px] h-[105px] object-cover rounded-[10px]"
-            />
-            <Link href={`/movie/${review.movie.movieId}`}>
+            <Link href={`/movie/${review.reviewId}`}>
+              <Image
+                src={review.movie.movieImg}
+                alt="포스터"
+                width={180}
+                height={110}
+                className="w-[176px] h-[105px] object-cover rounded-[10px]"
+              />
               <p className="w-full mt-[8px] flex justify-center text-body3 text-lightBlack">
                 {review.reviewTitle}
               </p>

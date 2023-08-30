@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { Dispatch, MutableRefObject, SetStateAction, useEffect } from 'react';
 
 export default function useOutsideClick(
   ref: MutableRefObject<HTMLDivElement | HTMLUListElement | null>,

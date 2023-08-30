@@ -1,18 +1,14 @@
-'use client';
-
-import StarFillIcon from '@/ui/icons/StarFillcon';
-import WriteReviewBtn from './WriteReviewBtn/WriteReviewBtn';
-import { useParams } from 'next/navigation';
-import HalfStarFillIcon from '@/ui/icons/HalfStarFillIcon';
 import useRateMovie from '@/hooks/useRateMovie';
+import HalfStarFillIcon from '@/ui/icons/HalfStarFillIcon';
+import StarFillIcon from '@/ui/icons/StarFillcon';
 import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-type Props = {
-  prevScore: number;
-};
-
-export default function Rate({ prevScore }: Props) {
-  const { movieId } = useParams();
+export default function Rate() {
+  const { register, setValue } = useFormContext();
+  register('star', {
+    min: { value: 0.5, message: '별점을 매겨주세요' },
+  });
   const {
     score,
     handleLeftHalfEnter,
@@ -20,30 +16,30 @@ export default function Rate({ prevScore }: Props) {
     handleStarClick,
     handleStarLeave,
     scoreFixed,
-    handleRate,
-  } = useRateMovie(prevScore, Number(movieId));
-
+  } = useRateMovie(0);
   useEffect(() => {
-    if (scoreFixed) handleRate();
+    setValue('star', scoreFixed);
   }, [scoreFixed]);
+
   return (
-    <section className="w-[100vw] flex justify-center mt-[11px] ">
-      <div className="relative w-[882px] h-[91px] rounded-[13px] border border-[#9a9a9abf] flex gap-[2px] items-center justify-center">
+    <div className="w-full text-body4 flex flex-col gap-[7px] ">
+      <p>별점</p>
+      <div className="flex gap-[3px]">
         {Array(5)
           .fill(0)
           .map((_, idx) => (
             <div
-              className="w-[55px] h-[55px] relative cursor-pointer flex "
+              className="w-[35px] h-[35px] relative cursor-pointer flex "
               onClick={handleStarClick}
               key={idx}
             >
               {score - Math.floor(score) === 0.5 &&
               Math.floor(score) === idx ? (
-                <HalfStarFillIcon key={idx} color="gold" />
+                <HalfStarFillIcon key={idx} color="gold" size={35} />
               ) : idx + 1 > score ? (
-                <StarFillIcon key={idx} color="lightGray" />
+                <StarFillIcon key={idx} color="lightGray" size={35} />
               ) : (
-                <StarFillIcon key={idx} color="gold" />
+                <StarFillIcon key={idx} color="gold" size={35} />
               )}
               <div
                 className="w-[50%] h-full z-[20]"
@@ -59,8 +55,7 @@ export default function Rate({ prevScore }: Props) {
               ></div>
             </div>
           ))}
-        <WriteReviewBtn />
       </div>
-    </section>
+    </div>
   );
 }

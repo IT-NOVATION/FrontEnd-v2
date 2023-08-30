@@ -16,3 +16,22 @@ export interface IReviewPreview {
   commentCount: number;
   movie: ISimpleMovie;
 }
+
+export interface IMutateReview {
+  movieId: number;
+  star: number;
+  reviewTitle: string;
+  reviewMainText: string;
+  hasGoodStory: boolean;
+  hasGoodProduction: boolean;
+  hasGoodScenario: boolean;
+  hasGoodDirecting: boolean;
+  hasGoodOst: boolean;
+  hasGoodVisual: boolean;
+  hasGoodActing: boolean;
+  hasGoodCharterCharming: boolean;
+  hasGoodDiction: boolean;
+  hasCheckDate: boolean;
+  hasSpoiler: boolean;
+  watchDate: string;
+}
