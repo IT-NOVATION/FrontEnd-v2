@@ -1,10 +1,12 @@
-export type Grade = 'STANDARD' | 'PREMIUM' | 'VIP' | 'SPECIAL';
 import { ISimpleReview } from './review';
 import { ISimpleMovie } from '@/interface/movie';
+
+export type Grade = 'STANDARD' | 'PREMIUM' | 'VIP' | 'SPECIAL';
 
 export interface IUserBase {
   userId: number;
 }
+
 export interface IUserDetail extends IUserBase {
   nickName: string;
   profileImg: string;
@@ -21,4 +23,9 @@ export interface IMovieTalkUser extends IUserBase {
   isMyProfile: boolean;
   isLoginUserFollowing: boolean;
   reviews: (ISimpleReview & { movie: ISimpleMovie })[];
+}
+
+export interface IReviewAuthor extends IUserDetail {
+  hasReviewLike: boolean;
+  bgImg?: string;
 }
