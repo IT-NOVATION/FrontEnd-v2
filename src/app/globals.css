@@ -16,3 +16,11 @@ input {
 button:hover {
   scale: 102%;
 }
+.ql-align-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.ql-align-center {
+  display: flex;
+  justify-content: center;
+}

@@ -45,7 +45,7 @@ export default function User({ user, isLast }: Props) {
             key={review.reviewId}
             className="w-[176px] flex flex-col  hover:scale-[102%]"
           >
-            <Link href={`/movie/${review.reviewId}`}>
+            <Link href={`/review/${review.reviewId}`}>
               <Image
                 src={review.movie.movieImg}
                 alt="포스터"

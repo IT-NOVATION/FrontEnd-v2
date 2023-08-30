@@ -26,7 +26,14 @@ export const getReview = (reviewId: number) =>
         isLoginUserFollowing: data.loginUser.pushedFollow,
         pushedReviewLike: data.loginUser.pushedReviewLike,
       },
-      movie: data.movie,
+      movie: {
+        movieId: data.movie.movieId,
+        title: data.movie.title,
+        movieReleasedDate: data.movie.movieReleaseDate,
+        movieImg: data.movie.movieImg,
+        movieGenre: data.movie.movieGenre,
+        movieCountry: data.movie.movieCountry,
+      },
       review: data.review,
       user: {
         userId: data.user.userId,
