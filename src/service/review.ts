@@ -2,12 +2,13 @@ import { getRefreshedTokens, getLoginState } from './account';
 import { SERVER_URI, getAccessTokenHeader } from './instance';
 
 const GET_REVIEW_URI = '/review/info/';
-const PUSH_REVIEW_LIKE_URI = '/push/review-like';
+const MUTATE_REVIEW_LIKE_URI = '/push/review-like';
 const GET_COMMENTS_URI = '/comment/read';
 const MUTATE_COMMENT_URI = '/comment/write';
 const DELETE_COMMENT_URI = '/comment/delete';
-const GET_LIKE_USER_URI = '/review/info/like-user';
+const GET_LIKE_USER_URI = '/review/info/like-user/';
 
+// 리뷰 기본 정보
 export const getReview = (reviewId: number) =>
   fetch(`${SERVER_URI}${GET_REVIEW_URI}${reviewId}`, {
     headers: getAccessTokenHeader(),
@@ -47,3 +48,40 @@ export const getReview = (reviewId: number) =>
         followings: data.user.followingNum,
       },
     }));
+
+// 좋아요 누르기
+export const mutateReviewLike = (data: { reviewId: number }) =>
+  fetch(`${SERVER_URI}${MUTATE_REVIEW_LIKE_URI}`, {
+    method: 'POST',
+    headers: getAccessTokenHeader(),
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error(`${res.status} 에러 발생`);
+    }
+    return res;
+  });
+
+// 좋아요 정보 가져오기
+export const getLikeInfo = (reviewId: number) =>
+  fetch(`${SERVER_URI}${GET_LIKE_USER_URI}${reviewId}`, {
+    headers: getAccessTokenHeader(),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        if (res.status === 401) {
+          return getRefreshedTokens(getLoginState);
+        }
+        throw new Error(`${res.status} 에러 발생`);
+      }
+      return res.json();
+    })
+    .then((data) =>
+      data.map((user: any) => ({
+        userId: user.userId,
+        nickName: user.nickname,
+        profileImg: user.profileImg,
+        isMyProfile: user.isMyProfile,
+        isLoginUserFollowing: user.isLoginUserFollowed,
+      }))
+    );

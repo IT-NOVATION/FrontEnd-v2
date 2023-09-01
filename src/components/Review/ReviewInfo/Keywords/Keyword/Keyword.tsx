@@ -9,7 +9,7 @@ export default function Keyword({ keyword }: Props) {
   const { icon, name } = keyword;
   return (
     <div
-      className="border h-[28px] rounded-[3px] px-[15px] py-[6px] flex gap-[6px] text-body5 
+      className="border h-[28px] rounded-[3px] px-[15px] py-[6px] flex items-center gap-[6px] text-body5 
    border-theme-main text-theme-main"
     >
       {icon}

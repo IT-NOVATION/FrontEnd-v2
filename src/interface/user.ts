@@ -7,18 +7,19 @@ export interface IUserBase {
   userId: number;
 }
 
-export interface IUserDetail extends IUserBase {
+export interface ISimpleUser extends IUserBase {
   nickName: string;
   profileImg: string;
+}
+
+export interface IUserDetail extends ISimpleUser {
   introduction?: string;
   grade: Grade;
   followers: number;
   followings: number;
 }
 
-export interface IMovieTalkUser extends IUserBase {
-  nickName: string;
-  profileImg: string;
+export interface IMovieTalkUser extends ISimpleUser {
   introduction?: string;
   isMyProfile: boolean;
   isLoginUserFollowing: boolean;
@@ -28,4 +29,9 @@ export interface IMovieTalkUser extends IUserBase {
 export interface IReviewAuthor extends IUserDetail {
   hasReviewLike: boolean;
   bgImg?: string;
+}
+
+export interface IReviewLikeUser extends ISimpleUser {
+  isMyProfile: string;
+  isLoginUserFollowing: boolean;
 }
