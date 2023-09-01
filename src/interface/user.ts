@@ -35,3 +35,4 @@ export interface IReviewLikeUser extends ISimpleUser {
   isMyProfile: string;
   isLoginUserFollowing: boolean;
 }
+export interface ICommentUser extends ISimpleUser {}

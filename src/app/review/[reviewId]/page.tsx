@@ -1,8 +1,9 @@
 import Review from '@/components/Review/Review';
+import { IComments } from '@/interface/comments';
 import { IReviewPage } from '@/interface/review';
 import { IReviewLikeUser } from '@/interface/user';
 import getQueryClient from '@/service/queryClient';
-import { getLikeInfo, getReview } from '@/service/review';
+import { getComments, getLikeInfo, getReview } from '@/service/review';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 
 type Props = {
@@ -20,7 +21,10 @@ export default async function ReviewPage({ params: { reviewId } }: Props) {
     ['reviewLikeInfo', reviewId],
     () => getLikeInfo(reviewId)
   );
-
+  await queryClient.prefetchInfiniteQuery<IComments>(
+    ['comments', reviewId],
+    () => getComments(`reviewId=${reviewId}&page=1`)
+  );
   const dehydratedState = dehydrate(queryClient);
   return (
     <div className="pt-[70px] flex flex-col ">

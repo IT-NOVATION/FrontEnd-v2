@@ -18,7 +18,7 @@ export default function LikeInfo({ pushedReviewLike, reviewId }: Props) {
   );
 
   return (
-    <section className="flex w-full justify-center items-center mb-[800px]">
+    <section className="flex w-full justify-center items-center">
       {likeInfo && (
         <>
           <div className="relative w-[131px] h-[45px] rounded-[80px]">

@@ -5,7 +5,7 @@ const GET_REVIEW_URI = '/review/info/';
 const MUTATE_REVIEW_LIKE_URI = '/push/review-like';
 const GET_COMMENTS_URI = '/comment/read';
 const MUTATE_COMMENT_URI = '/comment/write';
-const DELETE_COMMENT_URI = '/comment/delete';
+const DELETE_COMMENT_URI = '/comment/delete/';
 const GET_LIKE_USER_URI = '/review/info/like-user/';
 
 // 리뷰 기본 정보
@@ -85,3 +85,42 @@ export const getLikeInfo = (reviewId: number) =>
         isLoginUserFollowing: user.isLoginUserFollowed,
       }))
     );
+
+// 댓글 무한스크롤로 가져오기
+export const getComments = (params: string) =>
+  fetch(`${SERVER_URI}${GET_COMMENTS_URI}?${params}`, {
+    headers: getAccessTokenHeader(),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        if (res.status === 401) {
+          return getRefreshedTokens(getLoginState);
+        }
+        throw new Error(`${res.status} 에러 발생`);
+      }
+      return res.json();
+    })
+    .then((data) => ({
+      ...data,
+      commentList: data.commentList.map((comment: any) => ({
+        ...comment,
+        commentUserInfo: {
+          userId: comment.commentUserInfo.userId,
+          nickName: comment.commentUserInfo.nickname,
+          profieImg: comment.commentUserInfo.profieImg,
+        },
+      })),
+    }));
+
+export const deleteComment = (commentId: number) =>
+  fetch(`${SERVER_URI}${DELETE_COMMENT_URI}${commentId}`, {
+    headers: getAccessTokenHeader(),
+  }).then((res) => {
+    if (!res.ok) {
+      if (res.status === 401) {
+        return getRefreshedTokens(getLoginState);
+      }
+      throw new Error(`${res.status} 에러 발생`);
+    }
+    return res;
+  });

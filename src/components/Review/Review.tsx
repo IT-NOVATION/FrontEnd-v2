@@ -5,6 +5,7 @@ import { getReview } from '@/service/review';
 import { useQuery } from '@tanstack/react-query';
 import ReviewInfo from './ReviewInfo/ReviewInfo';
 import LikeInfo from './LikeInfo/LikeInfo';
+import CommentsInfo from './CommentsInfo/CommentsInfo';
 type Props = {
   reviewId: number;
 };
@@ -16,12 +17,15 @@ export default function Review({ reviewId }: Props) {
   return (
     <div className="w-[100vw] flex flex-col items-center">
       <div className="w-[900px] flex flex-col">
-        {data && <ReviewInfo reviewData={data} />}
         {data && (
-          <LikeInfo
-            pushedReviewLike={data.loginUser.pushedReviewLike}
-            reviewId={reviewId}
-          />
+          <>
+            <ReviewInfo reviewData={data} />
+            <LikeInfo
+              pushedReviewLike={data.loginUser.pushedReviewLike}
+              reviewId={reviewId}
+            />
+            <CommentsInfo reviewId={reviewId} />
+          </>
         )}
       </div>
     </div>
