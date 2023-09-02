@@ -5,7 +5,7 @@ import { getReview } from '@/service/review';
 import { useQuery } from '@tanstack/react-query';
 import ReviewInfo from './ReviewInfo/ReviewInfo';
 import LikeInfo from './LikeInfo/LikeInfo';
-import CommentsInfo from './CommentsInfo/CommentsInfo';
+import CommentsArea from './CommentsArea/CommentsArea';
 type Props = {
   reviewId: number;
 };
@@ -24,7 +24,7 @@ export default function Review({ reviewId }: Props) {
               pushedReviewLike={data.loginUser.pushedReviewLike}
               reviewId={reviewId}
             />
-            <CommentsInfo reviewId={reviewId} />
+            <CommentsArea reviewId={reviewId} />
           </>
         )}
       </div>

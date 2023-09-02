@@ -16,7 +16,6 @@ export default function Comment({ comment }: Props) {
   useLayoutEffect(() => {
     userId === comment.commentUserInfo.userId && setIsMyComment(true);
   }, [userId]);
-
   return (
     <div
       className={`relative w-full h-auto min-h-[125px] pb-[25px] pt-[25px] pl-[22px] pr-[15px] flex flex-col border-b-[0.5px] border-theme-lightGray ${

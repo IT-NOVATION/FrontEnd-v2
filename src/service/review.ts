@@ -1,3 +1,4 @@
+import { IMutateComment } from '@/interface/comments';
 import { getRefreshedTokens, getLoginState } from './account';
 import { SERVER_URI, getAccessTokenHeader } from './instance';
 
@@ -107,7 +108,7 @@ export const getComments = (params: string) =>
         commentUserInfo: {
           userId: comment.commentUserInfo.userId,
           nickName: comment.commentUserInfo.nickname,
-          profieImg: comment.commentUserInfo.profieImg,
+          profileImg: comment.commentUserInfo.profileImg,
         },
       })),
     }));
@@ -120,6 +121,19 @@ export const deleteComment = (commentId: number) =>
       if (res.status === 401) {
         return getRefreshedTokens(getLoginState);
       }
+      throw new Error(`${res.status} 에러 발생`);
+    }
+    return res;
+  });
+
+// 댓글 작성
+export const mutateComment = (data: IMutateComment) =>
+  fetch(`${SERVER_URI}${MUTATE_COMMENT_URI}`, {
+    method: 'POST',
+    headers: getAccessTokenHeader(),
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;
