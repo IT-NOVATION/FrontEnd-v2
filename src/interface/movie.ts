@@ -1,4 +1,4 @@
-export interface ISingleMovie {
+export interface IMoviepage {
   movie: IMovieDetail;
   loginUserInfoDto: ILoginUserInfoDto;
   reviewAndUserInfoList: IReviewAndUserInfo[];
@@ -28,6 +28,13 @@ export interface IMovieDetail {
   top3HasFeature: { topKeywordList: string[] };
   movieLikeCount: number;
   avgStarScore: number;
+}
+
+export interface IReviewMovie extends ISimpleMovie {
+  title: string;
+  movieCountry: string;
+  movieGenre: string;
+  movieReleasedDate: string;
 }
 
 export interface ILoginUserInfoDto {

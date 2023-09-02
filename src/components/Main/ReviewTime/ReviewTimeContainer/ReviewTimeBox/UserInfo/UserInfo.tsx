@@ -19,7 +19,7 @@ export default function UserInfo({ user, isFollowing }: Props) {
   const {
     state: { userId: loginUserId },
   } = useLoginState();
-  const { handleClick } = useFollowBtn(userId, ['reviewTime']);
+  const  handleClick = useFollowBtn(userId, ['reviewTime']);
 
   return (
     <div className="w-[200px] h-full ml-[30px] flex flex-col justify-center items-center">

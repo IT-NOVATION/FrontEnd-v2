@@ -1,4 +1,8 @@
-export default function FilmIcon() {
+type Props = {
+  color?: string;
+};
+
+export default function FilmIcon({ color = 'black' }: Props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,7 +13,7 @@ export default function FilmIcon() {
     >
       <path
         d="M7.74354 3.33333V12.6667H5.53108V3.33333H7.74354ZM11.0622 2H9.95599V3.33333H8.84977V2H4.42486V3.33333H3.31863V2H2.2124V14H3.31863V12.6667H4.42486V14H8.84977V12.6667H9.95599V14H11.0622V2ZM8.84977 6V4.66667H9.95599V6H8.84977ZM3.31863 6V4.66667H4.42486V6H3.31863ZM8.84977 8.66667V7.33333H9.95599V8.66667H8.84977ZM3.31863 8.66667V7.33333H4.42486V8.66667H3.31863ZM8.84977 11.3333V10H9.95599V11.3333H8.84977ZM3.31863 11.3333V10H4.42486V11.3333H3.31863Z"
-        fill="black"
+        fill={color || 'black'}
       />
     </svg>
   );

@@ -1,4 +1,5 @@
-import { ISimpleMovie } from './movie';
+import { IReviewMovie, ISimpleMovie } from './movie';
+import { Grade, IReviewAuthor } from './user';
 
 export interface ISimpleReview {
   reviewId: number;
@@ -34,4 +35,17 @@ export interface IMutateReview {
   hasCheckDate: boolean;
   hasSpoiler: boolean;
   watchDate: string;
+}
+
+export interface IReviewPage {
+  loginUser: {
+    isLoginUserFollowing: boolean; //수정
+    pushedReviewLike: boolean;
+  };
+  movie: IReviewMovie;
+  review: Omit<IMutateReview, 'movieId'> & {
+    reviewId: number;
+    createdDate: string;
+  };
+  user: IReviewAuthor;
 }

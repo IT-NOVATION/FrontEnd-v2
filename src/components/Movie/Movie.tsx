@@ -1,6 +1,6 @@
 'use client';
 
-import { ISingleMovie } from '@/interface/movie';
+import { IMoviepage } from '@/interface/movie';
 import { getMovieInfo } from '@/service/movie';
 import { useQuery } from '@tanstack/react-query';
 import MovieInfo from './MovieInfo/MovieInfo';
@@ -11,7 +11,7 @@ type Props = {
   movieId: number;
 };
 export default function Movie({ movieId }: Props) {
-  const { data } = useQuery<ISingleMovie>(['movie', `${movieId}`], () =>
+  const { data } = useQuery<IMoviepage>(['movie', `${movieId}`], () =>
     getMovieInfo(movieId)
   );
   return (
