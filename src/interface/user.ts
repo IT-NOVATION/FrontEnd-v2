@@ -36,3 +36,15 @@ export interface IReviewLikeUser extends ISimpleUser {
   isLoginUserFollowing: boolean;
 }
 export interface ICommentUser extends ISimpleUser {}
+export interface IFollowUser extends ISimpleUser {}
+export interface IMovielogUser extends ISimpleUser {
+  introduction?: string;
+  grade: Grade;
+  bgImg: string;
+}
+export interface IMutateProfileUpdate {
+  nickname: string;
+  introduction: string;
+  profileImg: string;
+  bgImg: string;
+}

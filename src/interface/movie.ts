@@ -73,3 +73,10 @@ export interface IReviewPreview {
     movieImg: string;
   };
 }
+
+export interface IInterestedMovie extends ISimpleMovie {
+  title: string;
+  star: number;
+  hasReviewdByLoginedUser: boolean;
+  reviewId?: number;
+}
