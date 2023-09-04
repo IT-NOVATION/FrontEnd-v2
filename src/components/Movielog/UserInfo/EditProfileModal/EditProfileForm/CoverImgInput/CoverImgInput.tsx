@@ -1,5 +1,5 @@
 import ProfileImg from '@/ui/user/ProfileImg';
-import { useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ImgUpload from '@/components/ImgUpload/ImgUpload';
 
