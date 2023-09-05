@@ -4,6 +4,7 @@ import { IMovielog } from '@/interface/movielog';
 import { getMovielog } from '@/service/movielog';
 import { useQuery } from '@tanstack/react-query';
 import UserInfo from './UserInfo/UserInfo';
+import FollowInfo from './FollowInfo/FollowInfo';
 
 type Props = {
   userId: number;
@@ -16,10 +17,17 @@ export default function Movielog({ userId }: Props) {
   return (
     <>
       {data && (
-        <UserInfo
-          isLoginUserFollowing={data.isLoginUserFollowing}
-          user={data.nowUser}
-        />
+        <>
+          <UserInfo
+            isLoginUserFollowing={data.isLoginUserFollowing}
+            user={data.nowUser}
+          />
+          <FollowInfo
+            grade={data.nowUser.grade}
+            followers={data.followers}
+            followings={data.followings}
+          />
+        </>
       )}
     </>
   );

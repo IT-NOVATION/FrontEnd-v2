@@ -45,12 +45,12 @@ export default function UserInfo({ user, isLoginUserFollowing }: Props) {
         </div>
       </div>
       <div className="w-[900px] mx-auto mt-[67px] text-theme-lightBlack flex items-center justify-between">
-        <p className="flex gap-[21px] items-center">
-          <span className="text-title2">{nickName}</span>
+        <div className="flex gap-[21px] items-center">
+          <h1 className="text-title2">{nickName}</h1>
           {introduction && (
-            <span className="text-body1 ml-[21px]">{introduction}</span>
+            <h2 className="text-body1 ml-[21px]">{introduction}</h2>
           )}
-        </p>
+        </div>
         {loginUserId === userId ? (
           <button
             onClick={handleEditClick}

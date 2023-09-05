@@ -7,9 +7,11 @@ type Props = {
   params: { userId: number };
 };
 
-export default function MovielogPage({ params: { userId } }: Props) {
+export default async function MovielogPage({ params: { userId } }: Props) {
   const queryClient = getQueryClient();
-  queryClient.prefetchQuery(['movielog', userId], () => getMovielog(userId));
+  await queryClient.prefetchQuery(['movielog', userId], () =>
+    getMovielog(userId)
+  );
   const dehydratedState = dehydrate(queryClient);
   return (
     <div className="w-[100vw] flex flex-col pt-[70px]">
