@@ -24,14 +24,14 @@ export default function NickNameInput({ nickName }: Props) {
         {...register('nickname', {
           required: '닉네임을 입력해주세요',
           pattern: {
-            value: /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/,
-            message: '한글, 영어, 숫자 포함 2-10 글자로 설정해주세요',
+            value: /^[a-z0-9가-힣]{2,10}$/,
+            message:
+              '한글, 영어, 숫자 포함 2-10 글자로 설정해주세요 (특수문자 불가)',
           },
           onChange: () => trigger('nickname'),
         })}
         type="text"
         className="w-full h-[23px] mt-[9px]  border-b-[0.7px] border-theme-gray text-body5 pb-[5px]"
-        placeholder="닉네임을 입력해주세요"
       />
       <h2 className="h-[15px] w-full text-body5 text-theme-red">
         {errors.nickname?.message}
