@@ -5,6 +5,7 @@ import { getMovielog } from '@/service/movielog';
 import { useQuery } from '@tanstack/react-query';
 import UserInfo from './UserInfo/UserInfo';
 import FollowInfo from './FollowInfo/FollowInfo';
+import Contents from './Contents/Contents';
 
 type Props = {
   userId: number;
@@ -26,6 +27,10 @@ export default function Movielog({ userId }: Props) {
             grade={data.nowUser.grade}
             followers={data.followers}
             followings={data.followings}
+          />
+          <Contents
+            reviews={data.reviews}
+            interestedMovie={data.interestedMovie}
           />
         </>
       )}
