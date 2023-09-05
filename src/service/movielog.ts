@@ -19,7 +19,7 @@ export const getMovielog = (userId: number) =>
       return res.json();
     })
     .then((data: any) => ({
-      isLoginedUserFollowsNowUser: data.isLoginedUserFollowsNowUser,
+      isLoginUserFollowing: data.isLoginedUserFollowsNowUser,
       followers: data.followers.map((user: any) => ({
         userId: user.userId,
         nickName: user.nickname,

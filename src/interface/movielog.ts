@@ -7,4 +7,5 @@ export interface IMovielog {
   interestedMovie: IInterestedMovie[];
   nowUser: IMovielogUser;
   reviews: IReviewPreview[];
+  isLoginUserFollowing: boolean;
 }

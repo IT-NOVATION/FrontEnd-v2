@@ -4,17 +4,27 @@ import ProfileImg from '@/ui/user/ProfileImg';
 import Image from 'next/image';
 import { useState } from 'react';
 import EditProfileModal from './EditProfileModal/EditProfileModal';
+import useLoginState from '@/hooks/useLoginState';
+import FollowBtn from '@/ui/buttons/FollowBtn';
+import FollowingBtn from '@/ui/buttons/FollowingBtn';
+import useFollowBtn from '@/hooks/useFollowBtn';
 
 type Props = {
   user: IMovielogUser;
+  isLoginUserFollowing: boolean;
 };
 
-export default function UserInfo({ user }: Props) {
-  const { bgImg, profileImg, nickName, introduction } = user;
+export default function UserInfo({ user, isLoginUserFollowing }: Props) {
+  const { userId, bgImg, profileImg, nickName, introduction } = user;
   const [openModal, setOpenModal] = useState(false);
-  const handleClick = () => {
+  const handleEditClick = () => {
     setOpenModal(true);
   };
+  const handleClick = useFollowBtn(userId, ['movielog', `${userId}`]);
+
+  const {
+    state: { userId: loginUserId },
+  } = useLoginState();
   return (
     <section className="w-full">
       <div
@@ -41,12 +51,18 @@ export default function UserInfo({ user }: Props) {
             <span className="text-body1 ml-[21px]">{introduction}</span>
           )}
         </p>
-        <button
-          onClick={handleClick}
-          className="w-[91px] h-[27px] rounded-[16.5px] border border-theme-gray text-body5"
-        >
-          프로필 편집
-        </button>
+        {loginUserId === userId ? (
+          <button
+            onClick={handleEditClick}
+            className="w-[91px] h-[27px] rounded-[16.5px] border border-theme-gray text-body5"
+          >
+            프로필 편집
+          </button>
+        ) : isLoginUserFollowing ? (
+          <FollowingBtn onClick={handleClick} />
+        ) : (
+          <FollowBtn onClick={handleClick} />
+        )}
       </div>
       {openModal && (
         <ModalPortal>
