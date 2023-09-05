@@ -1,5 +1,5 @@
 import ProfileImg from '@/ui/user/ProfileImg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ImgUpload from '@/components/ImgUpload/ImgUpload';
 
@@ -9,8 +9,12 @@ type Props = {
 
 export default function CoverImgInput({ coverImg }: Props) {
   const [img, setImg] = useState<string>(coverImg);
-  const { register } = useFormContext();
+  const { register, setValue } = useFormContext();
   register('bgImg');
+  useEffect(() => {
+    setValue('bgImg', img);
+  }, [img]);
+
   return (
     <div className="relative flex flex-col items-center gap-[2px]">
       <p className="text-body5">커버</p>

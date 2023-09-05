@@ -16,7 +16,7 @@ export default function NickNameInput({ nickName }: Props) {
     setValue('nickname', nickName);
   }, [nickName]);
   return (
-    <section className="w-full mt-[30px] ">
+    <section className="w-full mt-[30px]">
       <h2 className="text-body5">
         닉네임 <span className="text-theme-main">*</span>
       </h2>
