@@ -13,6 +13,7 @@ export default function Movielog({ userId }: Props) {
   const { data } = useQuery<IMovielog>(['movielog', userId], () =>
     getMovielog(userId)
   );
+  console.log(userId);
 
   return <>{data && <UserInfo user={data?.nowUser} />}</>;
 }

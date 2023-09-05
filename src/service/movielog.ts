@@ -1,3 +1,4 @@
+import { IMutateProfileUpdate } from '@/interface/user';
 import { getRefreshedTokens, getLoginState } from './account';
 import { SERVER_URI, getAccessTokenHeader } from './instance';
 
@@ -50,3 +51,15 @@ export const getMovielog = (userId: number) =>
         star: review.star,
       })),
     }));
+
+export const mutateProfileUpdate = (data: IMutateProfileUpdate) =>
+  fetch(`${SERVER_URI}${MUTATE_PROFILE_UPDATE_URI}`, {
+    method: 'PUT',
+    headers: getAccessTokenHeader(),
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error(`${res.status} 에러 발생`);
+    }
+    return res;
+  });
