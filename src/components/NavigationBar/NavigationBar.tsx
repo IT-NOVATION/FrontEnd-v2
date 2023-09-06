@@ -117,7 +117,7 @@ export default function NavigationBar() {
               </button>
             )}
           </div>
-          {isSearching && <SearchBox initialType="Movie" />}
+          {isSearching && <SearchBox initialType="movie" />}
         </motion.nav>
       )}
     </AnimatePresence>

@@ -6,14 +6,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PopularSearchTerms from './PopularSearchTerms/PopularSearchTerms';
 
-export type SearchType = 'User' | 'Movie';
+export type SearchType = 'user' | 'movie';
 type Props = {
   initialType: SearchType;
 };
 
 export default function SearchBox({ initialType }: Props) {
   const router = useRouter();
-  const [searchType, setSearchType] = useState<SearchType>('User');
+  const [searchType, setSearchType] = useState<SearchType>(initialType);
   const [value, setValue] = useState('');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
