@@ -1,3 +1,5 @@
+import { IMovieTimeMovie } from './movieTime';
+
 export interface IMoviepage {
   movie: IMovieDetail;
   loginUserInfoDto: ILoginUserInfoDto;
@@ -79,4 +81,9 @@ export interface IInterestedMovie extends ISimpleMovie {
   star: number;
   hasReviewdByLoginedUser: boolean;
   reviewId?: number;
+}
+
+export interface IMovieResult {
+  movieSearchResult: IMovieTimeMovie[];
+  totalSize: number;
 }

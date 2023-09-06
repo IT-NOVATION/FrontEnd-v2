@@ -48,3 +48,8 @@ export interface IMutateProfileUpdate {
   profileImg: string;
   bgImg: string;
 }
+
+export interface IUserResult {
+  userSearchResponseDtoList: IMovieTalkUser[];
+  totalSize: number;
+}

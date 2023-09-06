@@ -33,7 +33,7 @@ export default function SearchDropdown({ searchType, setSearchType }: Props) {
           <li
             onMouseEnter={userHover.handleHover}
             onMouseLeave={userHover.handleLeave}
-            onClick={() => handleItemClick('User')}
+            onClick={() => handleItemClick('user')}
             className={`h-[50px] pl-[30px] text-body1 w-full text-center text-body1 flex gap-[5px] items-center cursor-pointer z-[51] ${
               userHover.isHovered && 'bg-[#f5f5f7]'
             }`}
@@ -44,7 +44,7 @@ export default function SearchDropdown({ searchType, setSearchType }: Props) {
             onMouseEnter={movieHover.handleHover}
             onMouseLeave={movieHover.handleLeave}
             onClick={() => {
-              handleItemClick('Movie');
+              handleItemClick('movie');
             }}
             className={`h-[50px] pl-[30px]  text-body1 text-center text-body1 flex gap-[5px] items-center cursor-pointer z-[51] ${
               movieHover.isHovered && 'bg-[#f5f5f7]'
@@ -58,7 +58,7 @@ export default function SearchDropdown({ searchType, setSearchType }: Props) {
           onClick={handleClick}
           className="absolute w-[105px] h-[50px] pl-[30px] top-[27px] text-center text-body1 flex gap-[5px] items-center cursor-pointer "
         >
-          {searchType === 'User' ? '유저' : '영화'}
+          {searchType === 'user' ? '유저' : '영화'}
           <DropdownIcon />
         </div>
       )}

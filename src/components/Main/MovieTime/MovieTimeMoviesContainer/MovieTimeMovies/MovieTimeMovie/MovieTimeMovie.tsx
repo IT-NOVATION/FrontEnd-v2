@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 type Props = {
   movie: IMovieTimeMovie;
-  rank: number;
+  rank?: number;
 };
 
 export default function MovieTimeMovie({ movie, rank }: Props) {
@@ -25,9 +25,11 @@ export default function MovieTimeMovie({ movie, rank }: Props) {
         fill
         className="rounded-[10px]"
       />
-      <div className="absolute top-0 left-0 flex items-center justify-center text-white w-[23px] h-[23px] bg-[#0000009b] rounded-tl-[10px]">
-        {rank}
-      </div>
+      {rank && (
+        <div className="absolute top-0 left-0 flex items-center justify-center text-white w-[23px] h-[23px] bg-[#0000009b] rounded-tl-[10px]">
+          {rank}
+        </div>
+      )}
       {isHovered && (
         <div className="absolute top-0 left-0 w-full h-full rounded-[10px] bg-theme-bgColor flex flex-col items-center pt-[36px] text-white">
           <p className="text-[24px] font-[400]">

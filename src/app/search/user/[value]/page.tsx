@@ -1,0 +1,28 @@
+import UserSearchResult from '@/components/SearchResult/UserSearchResult/UserSearchResult';
+import getQueryClient from '@/service/queryClient';
+import { getUserSearchResult } from '@/service/search';
+import { Hydrate, dehydrate } from '@tanstack/react-query';
+
+type Props = {
+  params: {
+    value: string;
+  };
+};
+
+export default async function MovieSearchResultPage({
+  params: { value },
+}: Props) {
+  const decodedValue = decodeURI(value);
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(['search', 'user', decodedValue], () =>
+    getUserSearchResult(`userNm=${decodedValue}`)
+  );
+  const dehydratedState = dehydrate(queryClient);
+  return (
+    <div>
+      <Hydrate state={dehydratedState}>
+        <UserSearchResult value={decodedValue} />
+      </Hydrate>
+    </div>
+  );
+}
