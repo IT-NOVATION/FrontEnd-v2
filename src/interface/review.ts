@@ -7,15 +7,15 @@ export interface ISimpleReview {
 }
 
 export interface IReviewPreview {
-  reviewId: number;
-  reviewTitle: string;
-  star: number;
-  reviewMainText: string;
-  createdDate: string;
-  reviewLikeCount: number;
-  hasSpoiler: boolean;
-  commentCount: number;
-  movie: ISimpleMovie;
+  reviewId: number; //
+  reviewTitle: string; //
+  star: number; //
+  reviewMainText: string; //
+  createdDate: string; //
+  reviewLikeCount: number; //
+  hasSpoiler: boolean; //
+  commentCount: number; //
+  movie: ISimpleMovie; ///
 }
 
 export interface IMutateReview {

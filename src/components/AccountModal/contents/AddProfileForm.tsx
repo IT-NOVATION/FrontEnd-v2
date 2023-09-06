@@ -54,8 +54,11 @@ export default function AddProfileForm() {
             }`}
             {...register('nickname', {
               required: '닉네임을 입력해주세요',
-              minLength: { value: 2, message: '닉네임이 너무 짧습니다' },
-              maxLength: { value: 10, message: '닉네임이 너무 깁니다' },
+              pattern: {
+                value: /^[a-z0-9가-힣]{2,10}$/,
+                message:
+                  '한글, 영어, 숫자 포함 2-10 글자로 설정해주세요 (특수문자 불가)',
+              },
               onChange: () => trigger('nickname'),
             })}
             placeholder="닉네임"

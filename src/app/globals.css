@@ -16,6 +16,10 @@ input {
 button:hover {
   scale: 102%;
 }
+textarea {
+  outline: none;
+  resize: none;
+}
 .ql-align-right {
   display: flex;
   justify-content: flex-end;

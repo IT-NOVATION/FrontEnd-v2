@@ -9,13 +9,13 @@ import CommentIcon from '@/ui/icons/CommentIcon';
 type Props = {
   review: IReviewPreview;
   isLast: boolean;
-  isTodayBest: boolean;
+  isTodayBest?: boolean;
 };
 
 export default function ReviewPreview({ review, isLast, isTodayBest }: Props) {
   return (
     <li
-      className={`w-full h-[160px] pb-[20px] flex gap-[23.4px] ${
+      className={`w-full h-[160px] py-[10px] flex gap-[23.4px] ${
         !isLast && 'border-b-[0.7px] border-theme-gray'
       } `}
     >

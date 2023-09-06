@@ -1,6 +1,6 @@
 import { Dispatch, MutableRefObject, SetStateAction, useEffect } from 'react';
 
-export default function useOutsideClick(
+export default function useOutsideClick<T>(
   ref: MutableRefObject<HTMLDivElement | HTMLUListElement | null>,
   dropdownOpen: boolean,
   setDropdownOpen: Dispatch<SetStateAction<boolean>>
