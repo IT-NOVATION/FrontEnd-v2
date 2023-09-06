@@ -38,7 +38,13 @@ export const getUserSearchResult = (params: string) =>
           isMyProfile: user.isMyProfile,
           nickName: user.nickName,
           introduction: user.introduction,
-          reviews: user.reviews,
+          reviews: user.reviews.map((review: any) => ({
+            reviewId: review.reviewId,
+            reviewTitle: review.reviewTitle,
+            movie: {
+              movieImg: review.movieImg,
+            },
+          })),
           isLoginUserFollowing: user.isNowUserFollowThisUser,
         })
       ),

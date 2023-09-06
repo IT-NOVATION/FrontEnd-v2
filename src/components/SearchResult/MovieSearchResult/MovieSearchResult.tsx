@@ -14,7 +14,6 @@ export default function MovieSearchResult({ value }: Props) {
   const { data } = useQuery<IMovieResult>(['search', 'movie', value], () =>
     getMovieSearchResult(`movieNm=${value}`)
   );
-  console.log(data);
   return (
     <div>
       {data && (

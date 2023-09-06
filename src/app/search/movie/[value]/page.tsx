@@ -13,7 +13,6 @@ export default async function MovieSearchResultPage({
   params: { value },
 }: Props) {
   const decodedValue = decodeURI(value);
-  console.log(decodedValue);
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(['search', 'movie', decodedValue], () =>
     getMovieSearchResult(`movieNm=${decodedValue}`)
