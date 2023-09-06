@@ -8,6 +8,9 @@ type Props = {
 export default function Reviews({ reviews }: Props) {
   return (
     <ul className="w-full flex flex-col">
+      {!reviews.length && (
+        <h2 className="text-body5 text-center">작성한 리뷰가 없습니다.</h2>
+      )}
       {reviews.map((review, idx) => (
         <ReviewPreview
           key={review.reviewId}

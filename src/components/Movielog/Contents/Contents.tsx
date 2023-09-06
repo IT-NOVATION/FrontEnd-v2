@@ -3,6 +3,7 @@ import TypeBtns from './TypeBtns/TypeBtns';
 import { IInterestedMovie } from '@/interface/movie';
 import { IReviewPreview } from '@/interface/review';
 import Reviews from './Reviews/Reviews';
+import InterestedMovies from './InterestedMovies/InterestedMovies';
 
 export type contentsType = 'reviews' | 'interestedMovies';
 
@@ -22,7 +23,11 @@ export default function Contents({ reviews, interestedMovie }: Props) {
         reviewsCnt={reviews.length}
         interestedCnt={interestedMovie.length}
       />
-      <Reviews reviews={reviews} />
+      {type === 'reviews' ? (
+        <Reviews reviews={reviews} />
+      ) : (
+        <InterestedMovies movies={interestedMovie} />
+      )}
     </section>
   );
 }

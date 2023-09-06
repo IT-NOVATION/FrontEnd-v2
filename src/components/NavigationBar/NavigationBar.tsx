@@ -89,10 +89,7 @@ export default function NavigationBar() {
               <>
                 <AlarmIcon />
                 <Link href={`/movielog/${userId}`}>
-                  <button
-                    onClick={toggleDropdown}
-                    className="w-[107px] h-[43px] rounded-[20px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]"
-                  >
+                  <button className="w-[107px] h-[43px] rounded-[20px] bg-[#ffffff2] shadow-[3px_4px_2px_0px_#00000019,inset_0px_4px_4px_0px_#f6f6f6]">
                     {'무비로그'}
                   </button>
                 </Link>

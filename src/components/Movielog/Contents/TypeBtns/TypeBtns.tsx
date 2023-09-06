@@ -17,7 +17,6 @@ export default function TypeBtns({
   const changeTypeTo = (newType: contentsType) => {
     setType(newType);
   };
-  console.log(type);
   return (
     <div className="w-full flex items-center">
       <button
