@@ -8,8 +8,6 @@ type Props = {
 };
 
 export default function InterestedMovie({ movie }: Props) {
-  const { movieId, movieImg, title, star, hasReviewdByLoginedUser, reviewId } =
-    movie;
   const { isHovered, handleHover, handleLeave } = useHovered();
   return (
     <li
@@ -18,7 +16,7 @@ export default function InterestedMovie({ movie }: Props) {
       className={`relative w-[260px] h-[331px] rounded-[12px] flex flex-col`}
     >
       <Image
-        src={movieImg}
+        src={movie.movieImg}
         alt="포스터"
         fill
         className={`top-0 left-0 w-[260px] h-[331px] rounded-[12px]  ${
