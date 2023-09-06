@@ -6,12 +6,19 @@ import SmMainStarIcon from '@/ui/icons/SmMainStarIcon';
 import { cutMovieTitleText } from '@/utils/cutMovieTitleText';
 import { usePathname } from 'next/navigation';
 import MinusBtn from './MinusBtn/MinusBtn';
+import ReviewBtn from './ReviewBtn/ReviewBtn';
 
 type Props = { movie: IInterestedMovie };
 
 export default function MovieInfo({ movie }: Props) {
-  const { movieId, movieImg, title, star, hasReviewdByLoginedUser, reviewId } =
-    movie;
+  const {
+    movieId,
+    movieImg,
+    title,
+    star,
+    hasReviewdByLoginedUser: hasReviewed,
+    reviewId,
+  } = movie;
   const { fullStar, halfStar } = useCalcStar(star);
   const {
     state: { userId: loginUserId },
@@ -37,12 +44,17 @@ export default function MovieInfo({ movie }: Props) {
           </ul>
         </div>
       </div>
-      <div className="w-full px-[22px] justify-between">
+      <div className="w-full px-[22px] flex justify-between">
         <div>
           {loginUserId && isMyProfile && (
             <MinusBtn movieId={movieId} userId={+loginUserId} />
           )}
         </div>
+        <ReviewBtn
+          hasReviewed={hasReviewed}
+          movieId={movieId}
+          reviewId={reviewId}
+        />
       </div>
     </div>
   );
