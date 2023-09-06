@@ -10,6 +10,19 @@ export const metadata: Metadata = {
     template: `It's Movie Time | %s`,
   },
   description: '나만의 영화를 기록하는 시간',
+  openGraph: {
+    title: `It's Movie Time`,
+    description: '나만의 영화를 기록하는 시간',
+    url: 'http://its-movietime.com',
+    siteName: `It's Movie Time`,
+    images: [
+      {
+        url: '/images/logo.png',
+        width: 800,
+        height: 600,
+      },
+    ],
+  },
 };
 
 export default function HomePage() {
