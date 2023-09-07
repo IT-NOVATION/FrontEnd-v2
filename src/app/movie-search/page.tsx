@@ -10,11 +10,11 @@ import Link from 'next/link';
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: '무비서치',
-    description: `무비서치 | 잊고있었던 인생영화를 찾고 싶었던 당신을 위한`,
+    description: `무비서치 | 더 많은 이야기를 쓰고 만나보세요`,
     openGraph: {
       title: '무비서치',
-      images: ['/images/banners/banner4.png'],
-      description: `무비서치 | 잊고있었던 인생영화를 찾고 싶었던 당신을 위한`,
+      images: ['/images/banners/banner3.png'],
+      description: `무비서치 | 더 많은 이야기를 쓰고 만나보세요`,
     },
   };
 }
