@@ -19,7 +19,9 @@ export async function generateMetadata({
     title: `${(await data).movie.title}`,
     description: `영화 | ${(await data).movie.title}`,
     openGraph: {
+      title: `${(await data).movie.title}`,
       images: [`${(await data).movie.movieImg}`],
+      description: `영화 | ${(await data).movie.title}`,
     },
   };
 }
