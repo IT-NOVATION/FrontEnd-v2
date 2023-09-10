@@ -58,6 +58,7 @@ export default function Banners() {
             alt={`banner${slide}`}
             src={banners[slide]}
             className="w-[100vw]"
+            priority={true}
           />
         </motion.div>
       </AnimatePresence>
@@ -65,15 +66,14 @@ export default function Banners() {
         {Array(4)
           .fill(0)
           .map((_, i) => (
-              
-              <li key={i} >
-            <button
-              disabled={isAnimating}
-              onClick={() => handleIndicatorClick(i)}
-              className="rounded-full"
-            >
-              <BannerIndicator  selected={i === slide} />
-            </button>
+            <li key={i}>
+              <button
+                disabled={isAnimating}
+                onClick={() => handleIndicatorClick(i)}
+                className="rounded-full"
+              >
+                <BannerIndicator selected={i === slide} />
+              </button>
             </li>
           ))}
       </ul>

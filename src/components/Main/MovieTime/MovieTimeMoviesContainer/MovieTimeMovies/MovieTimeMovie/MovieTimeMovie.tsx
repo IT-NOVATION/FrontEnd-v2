@@ -19,10 +19,10 @@ export default function MovieTimeMovie({ movie, rank }: Props) {
       onMouseLeave={handleLeave}
     >
       <Image
-        loading="eager"
         alt="포스터"
         src={movie.movieImg}
         fill
+        priority={true}
         className="rounded-[10px]"
       />
       {rank && (
