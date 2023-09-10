@@ -4,7 +4,20 @@ import { getMovieSearch } from '@/service/movieSearch';
 import getQueryClient from '@/service/queryClient';
 import RightChevronIcon from '@/ui/icons/RightChevronIcon';
 import { dehydrate, Hydrate } from '@tanstack/react-query';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: '무비서치',
+    description: `무비서치 | 더 많은 이야기를 쓰고 만나보세요`,
+    openGraph: {
+      title: '무비서치',
+      images: ['/images/banners/banner3.png'],
+      description: `무비서치 | 더 많은 이야기를 쓰고 만나보세요`,
+    },
+  };
+}
 
 export default async function MovieSearchPage() {
   const queryClient = getQueryClient();
