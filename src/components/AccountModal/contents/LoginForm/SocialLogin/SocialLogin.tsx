@@ -7,19 +7,19 @@ const socialBtns = [
     type: 'google',
     button: <GoogleBtn />,
     name: '구글',
-    url: 'http://api.its-movietime.com:8080/oauth2/authorization/google',
+    url: 'https://api.its-movietime.com/oauth2/authorization/google',
   },
   {
     type: 'naver',
     button: <NaverBtn />,
     name: '네이버',
-    url: 'http://api.its-movietime.com:8080/oauth2/authorization/naver',
+    url: 'https://api.its-movietime.com/oauth2/authorization/naver',
   },
   {
     type: 'kakao',
     button: <KakaoBtn />,
     name: '카카오',
-    url: 'http://api.its-movietime.com:8080/oauth2/authorization/kakao',
+    url: 'https://api.its-movietime.com/oauth2/authorization/kakao',
   },
 ];
 
