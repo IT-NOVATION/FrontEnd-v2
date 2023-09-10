@@ -1,4 +1,4 @@
-export const SERVER_URI = 'http://api.its-movietime.com:8080/api/v1';
+export const SERVER_URI = 'https://api.its-movietime.com/api/v1';
 export const getAccessTokenHeader = () => {
   // 페이지가 client에 마운트될 때까지 기다렸다가 localStorage 접근한다.
   if (typeof window !== 'undefined') {
