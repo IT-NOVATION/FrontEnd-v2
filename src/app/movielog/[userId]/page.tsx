@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 type Props = {
   params: { userId: number };
 };
-export const dynamic = 'force-dyanmic';
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params: { userId },
