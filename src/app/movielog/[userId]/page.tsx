@@ -6,6 +6,7 @@ import { Hydrate, dehydrate } from '@tanstack/react-query';
 type Props = {
   params: { userId: number };
 };
+export const dynamic = 'force-dyanmic';
 
 export default async function MovielogPage({ params: { userId } }: Props) {
   const queryClient = getQueryClient();
