@@ -15,11 +15,11 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: '무비토크',
-    description: `무비토크 | 잊고있었던 인생영화를 찾고 싶었던 당신을 위한`,
+    description: `무비토크 | 더 많은 이야기를 쓰고 만나보세요`,
     openGraph: {
       title: '무비토크',
       images: ['/images/banners/banner4.png'],
-      description: `무비토크 | 잊고있었던 인생영화를 찾고 싶었던 당신을 위한`,
+      description: `무비토크 | 더 많은 이야기를 쓰고 만나보세요`,
     },
   };
 }
