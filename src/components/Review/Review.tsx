@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import ReviewInfo from './ReviewInfo/ReviewInfo';
 import LikeInfo from './LikeInfo/LikeInfo';
 import CommentsArea from './CommentsArea/CommentsArea';
+import AuthorInfo from './AuthorInfo/AuthorInfo';
 type Props = {
   reviewId: number;
 };
@@ -14,20 +15,25 @@ export default function Review({ reviewId }: Props) {
   const { data } = useQuery<IReviewPage>(['review', reviewId], () =>
     getReview(reviewId)
   );
+  console.log(data);
   return (
     <div className="w-[100vw] flex flex-col items-center">
-      <div className="w-[900px] flex flex-col">
-        {data && (
-          <>
+      {data && (
+        <>
+          <div className="w-[900px] flex flex-col">
             <ReviewInfo reviewData={data} />
             <LikeInfo
               pushedReviewLike={data.loginUser.pushedReviewLike}
               reviewId={reviewId}
             />
             <CommentsArea reviewId={reviewId} />
-          </>
-        )}
-      </div>
+          </div>
+          <AuthorInfo
+            author={data.user}
+            isLoginUserFollowing={data.loginUser.isLoginUserFollowing}
+          />
+        </>
+      )}
     </div>
   );
 }
