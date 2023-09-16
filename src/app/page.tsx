@@ -4,7 +4,7 @@ import MovieTime from '@/components/Main/MovieTime/MovieTime';
 import ReviewTime from '@/components/Main/ReviewTime/ReviewTime';
 import { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600 * 24;
 
 export const metadata: Metadata = {
   title: {
