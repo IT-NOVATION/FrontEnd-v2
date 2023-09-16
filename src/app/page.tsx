@@ -4,6 +4,8 @@ import MovieTime from '@/components/Main/MovieTime/MovieTime';
 import ReviewTime from '@/components/Main/ReviewTime/ReviewTime';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: {
     default: `It's Movie Time`,

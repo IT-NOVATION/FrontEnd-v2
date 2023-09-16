@@ -3,6 +3,8 @@ import getQueryClient from '@/service/queryClient';
 import { getUserSearchResult } from '@/service/search';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   params: {
     value: string;
