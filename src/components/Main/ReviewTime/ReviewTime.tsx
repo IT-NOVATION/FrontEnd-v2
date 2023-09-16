@@ -7,7 +7,10 @@ import ReviewTimeContainer from './ReviewTimeContainer/ReviewTimeContainer';
 
 export default async function ReviewTime() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery<IMovieTime>(['reviewTime'], getReviewTime);
+  await queryClient.prefetchQuery<IMovieTime>(['reviewTime'], getReviewTime, {
+    cacheTime: 3600 * 2,
+    staleTime: 3600 * 2,
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <section className="mt-[150px] w-full flex flex-col items-center ">

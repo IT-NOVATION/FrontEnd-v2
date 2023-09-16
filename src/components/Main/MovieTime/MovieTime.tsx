@@ -7,7 +7,10 @@ import MovieTimeMoviesContainer from './MovieTimeMoviesContainer/MovieTimeMovies
 
 export default async function MovieTime() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery<IMovieTime>(['movieTime'], getMovieTime);
+  await queryClient.prefetchQuery<IMovieTime>(['movieTime'], getMovieTime, {
+    cacheTime: 3600 * 2,
+    staleTime: 3600 * 2,
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <section className="mt-[60px] w-full flex flex-col items-center">
