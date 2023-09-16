@@ -5,6 +5,8 @@ import getQueryClient from '@/service/queryClient';
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   params: {
     movieId: number;

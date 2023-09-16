@@ -7,6 +7,8 @@ import { dehydrate, Hydrate } from '@tanstack/react-query';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: '무비서치',
