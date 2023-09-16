@@ -8,6 +8,10 @@ import Image from 'next/image';
 import serviceIntroImg from '../../../../public/images/service_intro.png';
 import inquireImg from '../../../../public/images/inquire.png';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { logout } from '@/service/account';
+import { useSetRecoilState } from 'recoil';
+import { modalStateAtom } from '@/recoil/accountModalAtom';
+import { ModalState } from '@/interface/accountModal';
 
 type Props = {
   dropdownOpen: boolean;
@@ -21,11 +25,15 @@ export default function ProfileDropdown({
   const queryClient = useQueryClient();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [modal, setModal] = useState<string | null>(null);
+  const setModalState = useSetRecoilState(modalStateAtom);
 
   useOutsideClick(dropdownRef, dropdownOpen, setDropdownOpen);
 
   const handleLogout = async () => {
     // 로그아웃
+    setModal(null);
+    console.log('clicked');
+    await logout();
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     await queryClient.invalidateQueries();
