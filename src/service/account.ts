@@ -18,6 +18,7 @@ const SEND_CODE_URI = '/email/password-find/email-send';
 const CHECK_CODE_URI = '/email/password-find/final-check';
 const CHANGE_PASSWORD_URI = '/email/password-find/rewrite-pw';
 const LOGIN_STATE_URI = '/user/state';
+const LOGOUT_URI = '/account/custom-logout';
 
 // 액세스 토큰 갱신
 export const getRefreshedTokens = (callback: () => Promise<any>) =>
@@ -31,9 +32,12 @@ export const getRefreshedTokens = (callback: () => Promise<any>) =>
       return res.json();
     })
     .then((json) => {
-      const { accessToken, refreshToken } = json;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
+      // const { accessToken, refreshToken } = json;
+      // localStorage.setItem('accessToken', accessToken);
+      // localStorage.setItem('refreshToken', refreshToken);
+      localStorage.deleteItem('accessToken');
+      localStorage.deleteItem('refreshToken');
+
       return callback();
     });
 
@@ -63,6 +67,18 @@ export const login = (data: ILoginForm) =>
       throw new Error(`${res.status} 에러 발생`);
     }
     return res.json();
+  });
+
+export const logout = () =>
+  fetch(`${SERVER_URI}${LOGOUT_URI}`, {
+    headers: getAccessTokenHeader(),
+  }).then((res) => {
+    if (!res.ok) {
+      if (res.status === 401) {
+        return getRefreshedTokens(getLoginState);
+      }
+      throw new Error(`${res.status} 에러 발생`);
+    }
   });
 
 export const signup = (data: ISignupForm) =>
