@@ -20,21 +20,26 @@ export default function CommentInput({ reviewId }: Props) {
     setValue('reviewId', reviewId);
   }, [reviewId]);
   const {
+    checkAuth,
     state: { loginState, nickname, profileImg },
   } = useLoginState();
   const { mutateAsync } = useMutation((data: IMutateComment) =>
     mutateComment(data)
   );
   const onValid = async (data: IMutateComment) => {
-    await mutateAsync(data);
-    await queryClient.invalidateQueries(['comments', reviewId]);
-    setValue('commentText', '');
+      await mutateAsync(data);
+      await queryClient.invalidateQueries(['comments', reviewId]);
+      setValue('commentText', '');
   };
   const onInvalid = ({ commentText }: FieldErrors<IMutateComment>) => {
     alert(commentText?.message);
   };
+  const handleFormClick = () => {
+    checkAuth();
+  };
   return (
     <form
+      onClick={handleFormClick}
       onSubmit={handleSubmit(onValid, onInvalid)}
       className="relative mt-[40px] w-full h-[250px] rounded-[20px] flex flex-col p-[13px] border-[0.7px] border-theme-darkGray"
     >

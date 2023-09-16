@@ -35,8 +35,9 @@ export const getRefreshedTokens = (callback: () => Promise<any>) =>
       // const { accessToken, refreshToken } = json;
       // localStorage.setItem('accessToken', accessToken);
       // localStorage.setItem('refreshToken', refreshToken);
-      localStorage.deleteItem("accessToken")
-      localStorage.deleteItem("refreshToken")
+      localStorage.deleteItem('accessToken');
+      localStorage.deleteItem('refreshToken');
+
       return callback();
     });
 
