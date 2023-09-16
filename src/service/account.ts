@@ -32,9 +32,11 @@ export const getRefreshedTokens = (callback: () => Promise<any>) =>
       return res.json();
     })
     .then((json) => {
-      const { accessToken, refreshToken } = json;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
+      // const { accessToken, refreshToken } = json;
+      // localStorage.setItem('accessToken', accessToken);
+      // localStorage.setItem('refreshToken', refreshToken);
+      localStorage.deleteItem("accessToken")
+      localStorage.deleteItem("refreshToken")
       return callback();
     });
 
