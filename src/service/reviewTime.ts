@@ -10,7 +10,7 @@ export const getReviewTime = () =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getLoginState);
+          return getRefreshedTokens(getReviewTime);
         }
         throw new Error(`${res.status} 에러 발생`);
       }

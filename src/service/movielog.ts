@@ -12,7 +12,7 @@ export const getMovielog = (userId: number) =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getLoginState);
+          return getRefreshedTokens(getMovielog);
         }
         throw new Error(`${res.status} 에러 발생`);
       }
