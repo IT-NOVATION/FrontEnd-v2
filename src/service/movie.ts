@@ -11,7 +11,7 @@ export const getMovieInfo = (movieId: number) =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(getLoginState);
+        return getRefreshedTokens(getMovieInfo);
       }
       throw new Error(`${res.status} 에러 발생`);
     }

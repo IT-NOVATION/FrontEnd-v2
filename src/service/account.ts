@@ -19,10 +19,11 @@ const CHECK_CODE_URI = '/email/password-find/final-check';
 const CHANGE_PASSWORD_URI = '/email/password-find/rewrite-pw';
 const LOGIN_STATE_URI = '/user/state';
 const LOGOUT_URI = '/account/custom-logout';
+const REISSUE_URI = '/reissue';
 
 // 액세스 토큰 갱신
-export const getRefreshedTokens = (callback: () => Promise<any>) =>
-  fetch(`${SERVER_URI}${LOGIN_STATE_URI}`, {
+export const getRefreshedTokens = (callback: any) =>
+  fetch(`${SERVER_URI}${REISSUE_URI}`, {
     headers: getRefreshTokenHeader(),
   })
     .then((res) => {
@@ -31,12 +32,12 @@ export const getRefreshedTokens = (callback: () => Promise<any>) =>
       }
       return res.json();
     })
-    .then((json) => {
-      // const { accessToken, refreshToken } = json;
-      // localStorage.setItem('accessToken', accessToken);
-      // localStorage.setItem('refreshToken', refreshToken);
-      localStorage.deleteItem('accessToken');
-      localStorage.deleteItem('refreshToken');
+    .then((data) => {
+      const { accessToken, refreshToken } = data;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      console.log('새 토큰 발급 완료!');
 
       return callback();
     });
