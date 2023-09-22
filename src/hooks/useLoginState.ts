@@ -9,10 +9,7 @@ export default function useLoginState() {
   const setModalState = useSetRecoilState(modalStateAtom);
   const { data: loginState } = useQuery<ILoginState>(
     ['loginState'],
-    getLoginState,
-    {
-      retry: 1,
-    }
+    getLoginState
   );
 
   // 로그인 여부 체크 후, 로그인 안됐으면 로그인 창 띄우기
