@@ -21,25 +21,27 @@ const LOGIN_STATE_URI = '/user/state';
 const LOGOUT_URI = '/account/custom-logout';
 const REISSUE_URI = '/reissue';
 
+interface ITokenData {
+  accessToken: string;
+  refreshToken: string;
+}
+
 // 액세스 토큰 갱신
-export const getRefreshedTokens = (callback: any) =>
+export const getRefreshedTokens = <T>(callback: T): Promise<T> =>
   fetch(`${SERVER_URI}${REISSUE_URI}`, {
     headers: getRefreshTokenHeader(),
   })
-    .then((res) => {
+    .then((res: Response) => {
       if (!res.ok) {
         throw new Error(`${res.status} 에러 발생`);
       }
       return res.json();
     })
-    .then((data) => {
+    .then((data: ITokenData) => {
       const { accessToken, refreshToken } = data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-
-      console.log('새 토큰 발급 완료!');
-
-      return callback();
+      return callback;
     });
 
 // 로그인 상태

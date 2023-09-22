@@ -11,7 +11,10 @@ import { useState } from 'react';
 import useSliderAnimation from '@/hooks/useSliderAnimation';
 
 export default function ReviewTimeContainer() {
-  const { data } = useQuery<IReviewTime[]>(['reviewTime'], getReviewTime);
+  const { data } = useQuery<IReviewTime[]>(['reviewTime'], getReviewTime, {
+    cacheTime: 3600 * 2,
+    staleTime: 3600 * 2,
+  });
   const {
     variants,
     page,
