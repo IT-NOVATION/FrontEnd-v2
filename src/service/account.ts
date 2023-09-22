@@ -27,7 +27,7 @@ interface ITokenData {
 }
 
 // 액세스 토큰 갱신
-export const getRefreshedTokens = <T>(callback: T) =>
+export const getRefreshedTokens = <T>(callback: T): Promise<T> =>
   fetch(`${SERVER_URI}${REISSUE_URI}`, {
     headers: getRefreshTokenHeader(),
   })
