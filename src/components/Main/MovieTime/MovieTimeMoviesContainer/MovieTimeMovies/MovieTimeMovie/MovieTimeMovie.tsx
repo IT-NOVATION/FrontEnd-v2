@@ -23,7 +23,9 @@ export default function MovieTimeMovie({ movie, rank }: Props) {
         src={movie.movieImg}
         fill
         priority={true}
-        className="rounded-[10px]"
+        className="rounded-[10px] w-[205px] h-[292px]"
+        width={205}
+        height={292}
       />
       {rank && (
         <div className="absolute top-0 left-0 flex items-center justify-center text-white w-[23px] h-[23px] bg-[#0000009b] rounded-tl-[10px]">
