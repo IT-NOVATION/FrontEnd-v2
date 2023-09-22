@@ -118,9 +118,6 @@ export const deleteComment = (commentId: number) =>
     headers: getAccessTokenHeader(),
   }).then((res) => {
     if (!res.ok) {
-      if (res.status === 401) {
-        return getRefreshedTokens(getLoginState);
-      }
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;

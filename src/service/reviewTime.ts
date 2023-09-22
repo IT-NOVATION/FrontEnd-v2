@@ -1,3 +1,4 @@
+import { IReviewTime } from '@/interface/reviewTime';
 import { getLoginState, getRefreshedTokens } from './account';
 import { SERVER_URI, getAccessTokenHeader } from './instance';
 
