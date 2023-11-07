@@ -25,7 +25,6 @@ export default function ProfileDropdown({
   const queryClient = useQueryClient();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [modal, setModal] = useState<string | null>(null);
-  const setModalState = useSetRecoilState(modalStateAtom);
 
   useOutsideClick(dropdownRef, dropdownOpen, setDropdownOpen);
 

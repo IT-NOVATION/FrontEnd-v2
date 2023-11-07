@@ -11,9 +11,10 @@ type Props = {
 };
 
 export default function MovieSearchResult({ value }: Props) {
-  const { data } = useQuery<IMovieResult>(['search', 'movie', value], () =>
-    getMovieSearchResult(`movieNm=${value}`)
-  );
+  const { data } = useQuery<IMovieResult>({
+    queryKey: ['search', 'movie', value],
+    queryFn: () => getMovieSearchResult(`movieNm=${value}`),
+  });
   return (
     <div>
       {data && (

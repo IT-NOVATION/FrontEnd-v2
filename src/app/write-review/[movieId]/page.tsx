@@ -50,17 +50,15 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
     alert('이미 리뷰를 작성한 영화입니다');
     router.back();
   };
-  const { data: movie, isError } = useQuery<IWriteReviewMovie>(
-    ['writeReview', `${movieId}`],
-    () => writeReviewMovieInfo(movieId),
-    {
-      retry: 1,
-    }
-  );
+  const { data: movie, isError } = useQuery<IWriteReviewMovie>({
+    queryKey: ['writeReview', `${movieId}`],
+    queryFn: () => writeReviewMovieInfo(movieId),
+    retry: 1,
+  });
   isError && handleError();
-  const { mutateAsync } = useMutation((data: IMutateReview) =>
-    mutateReview(data)
-  );
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: IMutateReview) => mutateReview(data),
+  });
 
   const onValid = async (data: IMutateReview) => {
     const res = await mutateAsync({ ...data, movieId: movieId });

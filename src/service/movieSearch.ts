@@ -5,7 +5,10 @@ const REVIEWS_URI = '/movie-search/review-order';
 const STAR_URI = '/movie-search/star-score-order';
 const RELEASE_DATE_URI = '/movie-search/release-order';
 
-export const getMovieSearch = (order: MovieSearchOrder, pageParam: number) => {
+export const getMovieSearch = (
+  order: MovieSearchOrder,
+  pageParam: number | unknown
+) => {
   switch (order) {
     case 'reviews':
       return fetch(`${SERVER_URI}${REVIEWS_URI}/${pageParam}`)

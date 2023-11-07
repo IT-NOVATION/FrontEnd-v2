@@ -12,9 +12,10 @@ type Props = {
 };
 
 export default function Movielog({ userId }: Props) {
-  const { data } = useQuery<IMovielog>(['movielog', userId], () =>
-    getMovielog(userId)
-  );
+  const { data } = useQuery<IMovielog>({
+    queryKey: ['movielog', userId],
+    queryFn: () => getMovielog(userId),
+  });
   return (
     <>
       {data && (

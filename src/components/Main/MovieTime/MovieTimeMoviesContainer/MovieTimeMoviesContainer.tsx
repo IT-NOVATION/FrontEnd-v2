@@ -12,8 +12,10 @@ import useSliderAnimation from '@/hooks/useSliderAnimation';
 export type ContentsType = 'popular' | 'recommended';
 
 export default function MovieTimeMoviesContainer() {
-  const { data } = useQuery<IMovieTime>(['movieTime'], getMovieTime, {
-    cacheTime: 3600 * 2,
+  const { data } = useQuery<IMovieTime>({
+    queryKey: ['movieTime'],
+    queryFn: getMovieTime,
+    gcTime: 3600 * 2,
     staleTime: 3600 * 2,
   });
   const [contentsType, setContentsType] = useState<ContentsType>('popular');

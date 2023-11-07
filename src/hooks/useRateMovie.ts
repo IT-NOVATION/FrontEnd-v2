@@ -29,15 +29,16 @@ export default function useRateMovie(prevScore: number, movieId?: number) {
       setScore(scoreFixed);
     }
   };
-  const { mutateAsync } = useMutation(
-    (data: { movieId: number; starScore: number }) => rateMovie(data)
-  );
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: { movieId: number; starScore: number }) =>
+      rateMovie(data),
+  });
 
   // 개별영화페이지에서 별점 매기는 함수
   const handleRate = async () => {
     const data = { movieId: Number(movieId), starScore: scoreFixed };
     await mutateAsync(data);
-    await queryClient.invalidateQueries(['movie', `${movieId}`]);
+    await queryClient.invalidateQueries({ queryKey: ['movie', `${movieId}`] });
   };
 
   return {

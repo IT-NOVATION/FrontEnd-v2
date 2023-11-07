@@ -4,7 +4,6 @@ import CoverImgInput from './CoverImgInput/CoverImgInput';
 import ProfileImgInput from './ProfileImgInput/ProfileImgInput';
 import NickNameInput from './NickNameInput/NickNameInput';
 import IntroTextarea from './IntroTextarea/IntroTextarea';
-import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { mutateProfileUpdate } from '@/service/movielog';
 
@@ -17,9 +16,9 @@ export default function EditProfileForm({ user, onCancel }: Props) {
   const { userId, bgImg, profileImg, nickName, introduction } = user;
   const methods = useForm<IMutateProfileUpdate>();
   const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation((data: IMutateProfileUpdate) =>
-    mutateProfileUpdate(data)
-  );
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: IMutateProfileUpdate) => mutateProfileUpdate(data),
+  });
   const onValid = async (data: IMutateProfileUpdate) => {
     try {
       await mutateAsync(data);

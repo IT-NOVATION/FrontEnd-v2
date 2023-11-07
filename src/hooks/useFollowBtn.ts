@@ -9,9 +9,9 @@ export default function useFollowBtn(
 ) {
   const queryClient = useQueryClient();
   const { checkAuth } = useLoginState();
-  const { mutateAsync } = useMutation((data: { targetUserId: number }) =>
-    mutateFollow(data)
-  );
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: { targetUserId: number }) => mutateFollow(data),
+  });
 
   const handleClick = async () => {
     const data = { targetUserId: userId };
@@ -19,8 +19,8 @@ export default function useFollowBtn(
       return;
     }
     await mutateAsync(data);
-    await queryClient.invalidateQueries(query1);
-    if (query2) await queryClient.invalidateQueries(query2);
+    await queryClient.invalidateQueries({ queryKey: query1 });
+    if (query2) await queryClient.invalidateQueries({ queryKey: query2 });
   };
 
   return handleClick;

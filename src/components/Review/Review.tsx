@@ -12,9 +12,10 @@ type Props = {
 };
 
 export default function Review({ reviewId }: Props) {
-  const { data } = useQuery<IReviewPage>(['review', reviewId], () =>
-    getReview(reviewId)
-  );
+  const { data } = useQuery<IReviewPage>({
+    queryKey: ['review', reviewId],
+    queryFn: () => getReview(reviewId),
+  });
   console.log(data);
   return (
     <div className="w-[100vw] flex flex-col items-center">

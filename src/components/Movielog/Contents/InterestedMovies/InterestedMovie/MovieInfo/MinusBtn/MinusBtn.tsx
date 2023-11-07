@@ -8,9 +8,9 @@ type Props = {
 
 export default function MinusBtn({ movieId, userId }: Props) {
   const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation((data: { movieId: number }) =>
-    mutateMovieLike(data)
-  );
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: { movieId: number }) => mutateMovieLike(data),
+  });
   const handleClick = async () => {
     const data = { movieId };
     try {
