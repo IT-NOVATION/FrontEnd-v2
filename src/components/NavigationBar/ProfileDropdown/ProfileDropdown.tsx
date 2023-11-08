@@ -31,14 +31,12 @@ export default function ProfileDropdown({
   const handleLogout = async () => {
     // 로그아웃
     setModal(null);
-    console.log('clicked');
     await logout();
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     await queryClient.invalidateQueries();
   };
   const handleClick = (item: string) => {
-    console.log('clicked');
     setModal(item);
   };
 

@@ -27,7 +27,6 @@ export default function ReviewEditor() {
     input.setAttribute('accept', 'image/*');
     input.click();
     input.addEventListener('change', async () => {
-      console.log('온체인지');
       const file = input.files?.[0];
       const formData = new FormData();
       formData.append('img', file as any);

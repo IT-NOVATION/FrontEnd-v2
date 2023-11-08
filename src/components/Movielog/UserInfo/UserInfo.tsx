@@ -24,7 +24,6 @@ export default function UserInfo({ user, isLoginUserFollowing }: Props) {
     'movielog',
     `${userId}`,
   ]);
-  isPending && console.log(variables?.targetUserId);
 
   const {
     state: { userId: loginUserId },
