@@ -4,7 +4,7 @@ import { IReviewPage } from '@/interface/review';
 import { IReviewLikeUser } from '@/interface/user';
 import getQueryClient from '@/service/queryClient';
 import { getComments, getLikeInfo, getReview } from '@/service/review';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -36,23 +36,25 @@ export async function generateMetadata({
 
 export default async function ReviewPage({ params: { reviewId } }: Props) {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery<IReviewPage>(['review', reviewId], () =>
-    getReview(reviewId)
-  );
-  await queryClient.prefetchQuery<IReviewLikeUser[]>(
-    ['reviewLikeInfo', reviewId],
-    () => getLikeInfo(reviewId)
-  );
-  await queryClient.prefetchInfiniteQuery<IComments>(
-    ['comments', reviewId],
-    () => getComments(`reviewId=${reviewId}&page=1`)
-  );
+  await queryClient.prefetchQuery<IReviewPage>({
+    queryKey: ['review', reviewId],
+    queryFn: () => getReview(reviewId),
+  });
+  await queryClient.prefetchQuery<IReviewLikeUser[]>({
+    queryKey: ['reviewLikeInfo', reviewId],
+    queryFn: () => getLikeInfo(reviewId),
+  });
+  await queryClient.prefetchInfiniteQuery<IComments>({
+    queryKey: ['comments', reviewId],
+    queryFn: () => getComments(`reviewId=${reviewId}&page=1`),
+    initialPageParam: 1,
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <div className="pt-[70px] flex flex-col ">
-      <Hydrate state={dehydratedState}>
+      <HydrationBoundary state={dehydratedState}>
         <Review reviewId={reviewId} />
-      </Hydrate>
+      </HydrationBoundary>
     </div>
   );
 }

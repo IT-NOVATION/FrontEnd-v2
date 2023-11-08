@@ -56,15 +56,16 @@ export default function WriteReviewPage({ params: { movieId } }: Params) {
     retry: 1,
   });
   isError && handleError();
-  const { mutateAsync } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (data: IMutateReview) => mutateReview(data),
+    onSuccess: (res) => {
+      setReviewId(res);
+      handleSaveClick();
+    },
   });
 
-  const onValid = async (data: IMutateReview) => {
-    const res = await mutateAsync({ ...data, movieId: movieId });
-    console.log(res);
-    setReviewId(res);
-    handleSaveClick();
+  const onValid =  (data: IMutateReview) => {
+    mutate({ ...data, movieId: movieId });
   };
   const onInvalid = ({
     reviewTitle,

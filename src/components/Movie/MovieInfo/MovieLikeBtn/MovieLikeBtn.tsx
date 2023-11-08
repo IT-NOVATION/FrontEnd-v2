@@ -15,15 +15,18 @@ export default function MovieLikeBtn({ liked, likeCount }: Props) {
   const { checkAuth } = useLoginState();
   const { movieId } = useParams();
   const data = { movieId: Number(movieId) };
-  const { mutateAsync } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: () => mutateMovieLike(data),
+    onSettled: async () =>
+      await queryClient.invalidateQueries({
+        queryKey: ['movie', `${movieId}`],
+      }),
   });
   const handleLikeClick = async () => {
     if (!checkAuth()) {
       return;
     }
-    await mutateAsync();
-    await queryClient.invalidateQueries({ queryKey: ['movie', `${movieId}`] });
+    mutate();
   };
   return (
     <button

@@ -13,10 +13,10 @@ export default function CommentsArea({ reviewId }: Props) {
     queryKey: ['comments', reviewId],
     queryFn: ({ pageParam }) =>
       getComments(`reviewId=${reviewId}&page=${pageParam}`),
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: ({ nowPage, lastPage }) => {
       if (nowPage === lastPage) {
-        return false;
+        return undefined;
       }
       return nowPage + 1;
     },

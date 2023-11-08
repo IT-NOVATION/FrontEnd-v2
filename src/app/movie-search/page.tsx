@@ -3,7 +3,7 @@ import { IMovieSearchMovies } from '@/interface/movieSearch';
 import { getMovieSearch } from '@/service/movieSearch';
 import getQueryClient from '@/service/queryClient';
 import RightChevronIcon from '@/ui/icons/RightChevronIcon';
-import { dehydrate, Hydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -23,10 +23,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function MovieSearchPage() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchInfiniteQuery<IMovieSearchMovies>(
-    ['movieSearch', 'reviews'],
-    () => getMovieSearch('reviews', 1)
-  );
+  await queryClient.prefetchInfiniteQuery<IMovieSearchMovies>({
+    queryKey: ['movieSearch', 'reviews'],
+    queryFn: () => getMovieSearch('reviews', 1),
+    initialPageParam: 1,
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <div className="w-[900px] mx-auto flex flex-col pt-[70px]">
@@ -50,9 +51,9 @@ export default async function MovieSearchPage() {
           </Link>
         </div>
       </div>
-      <Hydrate state={dehydratedState}>
+      <HydrationBoundary state={dehydratedState}>
         <MovieSearch />
-      </Hydrate>
+      </HydrationBoundary>
     </div>
   );
 }

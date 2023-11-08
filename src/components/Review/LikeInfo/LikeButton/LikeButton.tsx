@@ -13,17 +13,19 @@ export default function LikeButton({ pushed, likeCount, reviewId }: Props) {
   const queryClient = useQueryClient();
   const { checkAuth } = useLoginState();
 
-  const { mutateAsync: mutateLike } = useMutation({
+  const { mutate: mutateLike } = useMutation({
     mutationFn: (data: { reviewId: number }) => mutateReviewLike(data),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['review', reviewId] });
+      queryClient.invalidateQueries({
+        queryKey: ['reviewLikeInfo', reviewId],
+      });
+    },
   });
-  const handleLikeClick = async () => {
+  const handleLikeClick = () => {
     checkAuth();
     const data = { reviewId };
-    await mutateLike(data);
-    await queryClient.invalidateQueries({ queryKey: ['review', reviewId] });
-    await queryClient.invalidateQueries({
-      queryKey: ['reviewLikeInfo', reviewId],
-    });
+    mutateLike(data);
   };
   return (
     <button

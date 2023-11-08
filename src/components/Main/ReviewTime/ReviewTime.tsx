@@ -1,13 +1,16 @@
 import { IMovieTime } from '@/interface/movieTime';
 import getQueryClient from '@/service/queryClient';
 import ColorEllipseIcon from '@/ui/icons/ColorEllipseIcon';
-import { dehydrate, Hydrate } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { getReviewTime } from '@/service/reviewTime';
 import ReviewTimeContainer from './ReviewTimeContainer/ReviewTimeContainer';
 
 export default async function ReviewTime() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery<IMovieTime>(['reviewTime'], getReviewTime);
+  await queryClient.prefetchQuery<IMovieTime>({
+    queryKey: ['reviewTime'],
+    queryFn: getReviewTime,
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <section className="mt-[150px] w-full flex flex-col items-center ">
@@ -17,9 +20,9 @@ export default async function ReviewTime() {
           REVIEW TIME
         </h1>
       </div>
-      <Hydrate state={dehydratedState}>
+      <HydrationBoundary state={dehydratedState}>
         <ReviewTimeContainer />
-      </Hydrate>
+      </HydrationBoundary>
     </section>
   );
 }

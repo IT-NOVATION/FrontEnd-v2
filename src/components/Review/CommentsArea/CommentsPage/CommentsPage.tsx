@@ -7,12 +7,12 @@ type Props = {
 
 export default function CommentsPage({ comments }: Props) {
   return (
-    <ul className="w-full flex flex-col">
+    <div className="w-full flex flex-col">
       {[...comments].reverse().map((comment) => (
-        <li key={comment.commentId}>
+        <div key={comment.commentId}>
           <Comment comment={comment} />
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
