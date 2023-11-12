@@ -1,11 +1,11 @@
-import Movie from '@/components/Movie/Movie';
-import { IMoviepage } from '@/interface/movie';
-import { getMovieInfo } from '@/service/movie';
-import getQueryClient from '@/service/queryClient';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
-import { Metadata } from 'next';
+import Movie from "@/components/Movie/Movie";
+import { IMoviepage } from "@/interface/movie";
+import { getMovieInfo } from "@/service/movie";
+import getQueryClient from "@/service/queryClient";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { Metadata } from "next";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: {
@@ -30,15 +30,16 @@ export async function generateMetadata({
 
 export default async function MoviePage({ params: { movieId } }: Props) {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery<IMoviepage>(['movie', `${movieId}`], () =>
-    getMovieInfo(movieId)
-  );
+  await queryClient.prefetchQuery<IMoviepage>({
+    queryKey: ["movie", `${movieId}`],
+    queryFn: () => getMovieInfo(movieId),
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <div className="w-[100vw] flex flex-col pt-[90px]">
-      <Hydrate state={dehydratedState}>
+      <HydrationBoundary state={dehydratedState}>
         <Movie movieId={movieId} />
-      </Hydrate>
+      </HydrationBoundary>
     </div>
   );
 }

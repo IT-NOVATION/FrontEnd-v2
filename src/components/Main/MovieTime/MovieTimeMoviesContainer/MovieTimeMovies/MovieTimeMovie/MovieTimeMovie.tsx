@@ -1,9 +1,9 @@
-import useHovered from '@/hooks/useHovered';
-import { IMovieTimeMovie } from '@/interface/movieTime';
-import GoldSmallStarIcon from '@/ui/icons/GoldSmallStarIcon';
-import Image from 'next/image';
-import { cutMovieTitleText } from '@/utils/cutMovieTitleText';
-import Link from 'next/link';
+import useHovered from "@/hooks/useHovered";
+import { IMovieTimeMovie } from "@/interface/movieTime";
+import GoldSmallStarIcon from "@/ui/icons/GoldSmallStarIcon";
+import Image from "next/image";
+import { cutMovieTitleText } from "@/utils/cutMovieTitleText";
+import Link from "next/link";
 
 type Props = {
   movie: IMovieTimeMovie;
@@ -24,8 +24,6 @@ export default function MovieTimeMovie({ movie, rank }: Props) {
         fill
         priority={true}
         className="rounded-[10px] w-[205px] h-[292px]"
-        width={205}
-        height={292}
       />
       {rank && (
         <div className="absolute top-0 left-0 flex items-center justify-center text-white w-[23px] h-[23px] bg-[#0000009b] rounded-tl-[10px]">

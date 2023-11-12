@@ -1,9 +1,9 @@
-import MovieSearchResult from '@/components/SearchResult/MovieSearchResult/MovieSearchResult';
-import getQueryClient from '@/service/queryClient';
-import { getMovieSearchResult } from '@/service/search';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
+import MovieSearchResult from "@/components/SearchResult/MovieSearchResult/MovieSearchResult";
+import getQueryClient from "@/service/queryClient";
+import { getMovieSearchResult } from "@/service/search";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: {
@@ -16,15 +16,16 @@ export default async function MovieSearchResultPage({
 }: Props) {
   const decodedValue = decodeURI(value);
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(['search', 'movie', decodedValue], () =>
-    getMovieSearchResult(`movieNm=${decodedValue}`)
-  );
+  await queryClient.prefetchQuery({
+    queryKey: ["search", "movie", decodedValue],
+    queryFn: () => getMovieSearchResult(`movieNm=${decodedValue}`),
+  });
   const dehydratedState = dehydrate(queryClient);
   return (
     <div>
-      <Hydrate state={dehydratedState}>
+      <HydrationBoundary state={dehydratedState}>
         <MovieSearchResult value={decodedValue} />
-      </Hydrate>
+      </HydrationBoundary>
     </div>
   );
 }

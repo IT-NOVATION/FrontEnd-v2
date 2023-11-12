@@ -1,22 +1,24 @@
-'use client';
+"use client";
 
-import { IMovieTime } from '@/interface/movieTime';
-import { getMovieTime } from '@/service/movieTime';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import MovieTimeMovies from './MovieTimeMovies/MovieTimeMovies';
-import LeftArrowIcon from '@/ui/icons/LeftArrowIcon';
-import RightArrowIcon from '@/ui/icons/RightArrowIcon';
-import useSliderAnimation from '@/hooks/useSliderAnimation';
+import { IMovieTime } from "@/interface/movieTime";
+import { getMovieTime } from "@/service/movieTime";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import MovieTimeMovies from "./MovieTimeMovies/MovieTimeMovies";
+import LeftArrowIcon from "@/ui/icons/LeftArrowIcon";
+import RightArrowIcon from "@/ui/icons/RightArrowIcon";
+import useSliderAnimation from "@/hooks/useSliderAnimation";
 
-export type ContentsType = 'popular' | 'recommended';
+export type ContentsType = "popular" | "recommended";
 
 export default function MovieTimeMoviesContainer() {
-  const { data } = useQuery<IMovieTime>(['movieTime'], getMovieTime, {
-    cacheTime: 3600 * 2,
+  const { data } = useQuery<IMovieTime>({
+    queryKey: ["movieTime"],
+    queryFn: getMovieTime,
+    gcTime: 3600 * 2,
     staleTime: 3600 * 2,
   });
-  const [contentsType, setContentsType] = useState<ContentsType>('popular');
+  const [contentsType, setContentsType] = useState<ContentsType>("popular");
 
   const handleContentClick = (selected: ContentsType) => {
     setContentsType(selected);
@@ -36,17 +38,17 @@ export default function MovieTimeMoviesContainer() {
     <div>
       <div className="flex justify-center gap-[90px] my-[40px]">
         <button
-          onClick={() => handleContentClick('popular')}
+          onClick={() => handleContentClick("popular")}
           className={`text-theme-lightBlack text-body1 ${
-            contentsType === 'popular' && 'border-b border-black'
+            contentsType === "popular" && "border-b border-black"
           }`}
         >
           무비타임 인기
         </button>
         <button
-          onClick={() => handleContentClick('recommended')}
+          onClick={() => handleContentClick("recommended")}
           className={`text-theme-lightBlack text-body1 ${
-            contentsType === 'recommended' && 'border-b border-black'
+            contentsType === "recommended" && "border-b border-black"
           }`}
         >
           무비타임 추천
@@ -64,7 +66,7 @@ export default function MovieTimeMoviesContainer() {
             direction={direction}
             animate={animate}
             movies={
-              contentsType === 'popular' ? data?.popular : data?.recommended
+              contentsType === "popular" ? data?.popular : data?.recommended
             }
             page={page}
           />

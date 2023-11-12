@@ -1,18 +1,20 @@
-'use client';
+"use client";
 
-import { IReviewTime } from '@/interface/reviewTime';
-import { getReviewTime } from '@/service/reviewTime';
-import LeftArrowIcon from '@/ui/icons/LeftArrowIcon';
-import RightArrowIcon from '@/ui/icons/RightArrowIcon';
-import { useQuery } from '@tanstack/react-query';
-import { AnimatePresence, motion } from 'framer-motion';
-import ReviewTimeBox from './ReviewTimeBox/ReviewTimeBox';
-import { useState } from 'react';
-import useSliderAnimation from '@/hooks/useSliderAnimation';
+import { IReviewTime } from "@/interface/reviewTime";
+import { getReviewTime } from "@/service/reviewTime";
+import LeftArrowIcon from "@/ui/icons/LeftArrowIcon";
+import RightArrowIcon from "@/ui/icons/RightArrowIcon";
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import ReviewTimeBox from "./ReviewTimeBox/ReviewTimeBox";
+import { useState } from "react";
+import useSliderAnimation from "@/hooks/useSliderAnimation";
 
 export default function ReviewTimeContainer() {
-  const { data } = useQuery<IReviewTime[]>(['reviewTime'], getReviewTime, {
-    cacheTime: 3600 * 2,
+  const { data } = useQuery<IReviewTime[]>({
+    queryKey: ["reviewTime"],
+    queryFn:getReviewTime,
+    gcTime: 3600 * 2,
     staleTime: 3600 * 2,
   });
   const {
@@ -39,7 +41,7 @@ export default function ReviewTimeContainer() {
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ type: 'linear', duration: animate ? 0.5 : 0 }}
+          transition={{ type: "linear", duration: animate ? 0.5 : 0 }}
         >
           {data && <ReviewTimeBox data={data[Math.abs(page % data.length)]} />}
         </motion.div>
