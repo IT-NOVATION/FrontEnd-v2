@@ -5,12 +5,12 @@ type Props = { commentId: number };
 
 export default function DeleteBtn({ commentId }: Props) {
   const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation((commentId: number) =>
-    deleteComment(commentId)
-  );
-  const handleClick = async () => {
-    await mutateAsync(commentId);
-    await queryClient.invalidateQueries(['comments']);
+  const { mutate } = useMutation({
+    mutationFn: (commentId: number) => deleteComment(commentId),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['comments'] }),
+  });
+  const handleClick = () => {
+    mutate(commentId);
   };
   return (
     <button

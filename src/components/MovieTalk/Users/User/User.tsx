@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function User({ user, isLast }: Props) {
-  const handleClick = useFollowBtn(
+  const { handleClick } = useFollowBtn(
     user.userId,
     ['movieTalk'],
     ['search', 'user']

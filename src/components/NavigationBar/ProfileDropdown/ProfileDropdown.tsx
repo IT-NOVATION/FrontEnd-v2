@@ -25,21 +25,18 @@ export default function ProfileDropdown({
   const queryClient = useQueryClient();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [modal, setModal] = useState<string | null>(null);
-  const setModalState = useSetRecoilState(modalStateAtom);
 
   useOutsideClick(dropdownRef, dropdownOpen, setDropdownOpen);
 
   const handleLogout = async () => {
     // 로그아웃
     setModal(null);
-    console.log('clicked');
     await logout();
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     await queryClient.invalidateQueries();
   };
   const handleClick = (item: string) => {
-    console.log('clicked');
     setModal(item);
   };
 

@@ -21,7 +21,6 @@ export default function MovieTimeMovie({ movie, rank }: Props) {
       <Image
         alt="포스터"
         src={movie.movieImg}
-        fill
         priority={true}
         className="rounded-[10px] w-[205px] h-[292px]"
       />

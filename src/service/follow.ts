@@ -2,7 +2,9 @@ import { SERVER_URI, getAccessTokenHeader } from './instance';
 
 const FOLLOW_URI = '/push/follow';
 
-export const mutateFollow = (data: { targetUserId: number }) =>
+export const mutateFollow = (
+  data: { targetUserId: number }
+) =>
   fetch(`${SERVER_URI}${FOLLOW_URI}`, {
     method: 'POST',
     headers: getAccessTokenHeader(),

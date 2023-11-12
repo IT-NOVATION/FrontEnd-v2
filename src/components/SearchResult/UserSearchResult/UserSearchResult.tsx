@@ -10,9 +10,10 @@ type Props = {
   value: string;
 };
 export default function UserSearchResult({ value }: Props) {
-  const { data } = useQuery<IUserResult>(['search', 'user', value], () =>
-    getUserSearchResult(`userNm=${value}`)
-  );
+  const { data } = useQuery<IUserResult>({
+    queryKey: ['search', 'user', value],
+    queryFn: () => getUserSearchResult(`userNm=${value}`),
+  });
   return (
     <div>
       {data && (

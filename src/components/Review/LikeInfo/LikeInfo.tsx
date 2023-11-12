@@ -1,8 +1,8 @@
 'use client';
 
 import { IReviewLikeUser } from '@/interface/user';
-import { getLikeInfo, mutateReviewLike } from '@/service/review';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getLikeInfo } from '@/service/review';
+import { useQuery } from '@tanstack/react-query';
 import LikeButton from './LikeButton/LikeButton';
 import MoreButton from './MoreButton/MoreButton';
 
@@ -12,10 +12,10 @@ type Props = {
 };
 
 export default function LikeInfo({ pushedReviewLike, reviewId }: Props) {
-  const { data: likeInfo } = useQuery<IReviewLikeUser[]>(
-    ['reviewLikeInfo', reviewId],
-    () => getLikeInfo(reviewId)
-  );
+  const { data: likeInfo } = useQuery<IReviewLikeUser[]>({
+    queryKey: ['reviewLikeInfo', reviewId],
+    queryFn: () => getLikeInfo(reviewId),
+  });
 
   return (
     <section className="flex w-full justify-center items-center">

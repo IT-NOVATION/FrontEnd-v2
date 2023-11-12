@@ -6,7 +6,7 @@ import {
 } from '@/service/movieTalk';
 import getQueryClient from '@/service/queryClient';
 import RightChevronIcon from '@/ui/icons/RightChevronIcon';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -26,15 +26,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function MovieTalkPage() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(['movieTalk', 'bestReviews'], getBestReviews);
-  await queryClient.prefetchQuery(
-    ['movieTalk', 'latestReviews'],
-    getLatestReviews
-  );
-  await queryClient.prefetchQuery(
-    ['movieTalk', 'popularUsers'],
-    getPopularUsers
-  );
+  await queryClient.prefetchQuery({
+    queryKey: ['movieTalk', 'bestReviews'],
+    queryFn: getBestReviews,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ['movieTalk', 'latestReviews'],
+    queryFn: getLatestReviews,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ['movieTalk', 'popularUsers'],
+    queryFn: getPopularUsers,
+  });
   const dehydratedState = dehydrate(queryClient);
 
   return (
@@ -61,9 +64,9 @@ export default async function MovieTalkPage() {
           </Link>
         </div>
       </div>
-      <Hydrate state={dehydratedState}>
+      <HydrationBoundary state={dehydratedState}>
         <MovieTalk />
-      </Hydrate>
+      </HydrationBoundary>
     </div>
   );
 }

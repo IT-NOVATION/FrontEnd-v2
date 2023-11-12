@@ -20,7 +20,10 @@ export default function UserInfo({ user, isLoginUserFollowing }: Props) {
   const handleEditClick = () => {
     setOpenModal(true);
   };
-  const handleClick = useFollowBtn(userId, ['movielog', `${userId}`]);
+  const { handleClick, variables, isPending } = useFollowBtn(userId, [
+    'movielog',
+    `${userId}`,
+  ]);
 
   const {
     state: { userId: loginUserId },
@@ -51,6 +54,7 @@ export default function UserInfo({ user, isLoginUserFollowing }: Props) {
             <h2 className="text-body1 ml-[21px]">{introduction}</h2>
           )}
         </div>
+
         {loginUserId === userId ? (
           <button
             onClick={handleEditClick}
@@ -58,6 +62,12 @@ export default function UserInfo({ user, isLoginUserFollowing }: Props) {
           >
             프로필 편집
           </button>
+        ) : isPending ? (
+          isLoginUserFollowing ? (
+            <FollowBtn />
+          ) : (
+            <FollowingBtn />
+          )
         ) : isLoginUserFollowing ? (
           <FollowingBtn onClick={handleClick} />
         ) : (
@@ -76,3 +86,7 @@ export default function UserInfo({ user, isLoginUserFollowing }: Props) {
     </section>
   );
 }
+
+// 1. 요청 전송
+// 2. pending => 변경 예측 상태로 변경시킴
+// 3.

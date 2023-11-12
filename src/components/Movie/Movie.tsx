@@ -11,9 +11,10 @@ type Props = {
   movieId: number;
 };
 export default function Movie({ movieId }: Props) {
-  const { data } = useQuery<IMoviepage>(['movie', `${movieId}`], () =>
-    getMovieInfo(movieId)
-  );
+  const { data } = useQuery<IMoviepage>({
+    queryKey: ['movie', `${movieId}`],
+    queryFn: () => getMovieInfo(movieId),
+  });
   return (
     <>
       {data && data.loginUserInfoDto && (

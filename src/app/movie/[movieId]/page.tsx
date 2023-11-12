@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import Movie from "@/components/Movie/Movie";
 import { IMoviepage } from "@/interface/movie";
 import { getMovieInfo } from "@/service/movie";
 import getQueryClient from "@/service/queryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { Metadata } from "next";
+=======
+import Movie from '@/components/Movie/Movie';
+import { IMoviepage } from '@/interface/movie';
+import { getMovieInfo } from '@/service/movie';
+import getQueryClient from '@/service/queryClient';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { Metadata } from 'next';
+>>>>>>> feature/tanstack-v5
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +40,11 @@ export async function generateMetadata({
 export default async function MoviePage({ params: { movieId } }: Props) {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery<IMoviepage>({
+<<<<<<< HEAD
     queryKey: ["movie", `${movieId}`],
+=======
+    queryKey: ['movie', `${movieId}`],
+>>>>>>> feature/tanstack-v5
     queryFn: () => getMovieInfo(movieId),
   });
   const dehydratedState = dehydrate(queryClient);

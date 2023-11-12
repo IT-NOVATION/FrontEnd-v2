@@ -13,14 +13,15 @@ type Props = {
 };
 
 export default function Users({ content }: Props) {
-  const { data: users } = useQuery<IMovieTalkUser[]>(
-    ['movieTalk', `${content}`],
-    content === 'bestReviews'
-      ? getBestReviews
-      : content === 'latestReviews'
-      ? getLatestReviews
-      : getPopularUsers
-  );
+  const { data: users } = useQuery<IMovieTalkUser[]>({
+    queryKey: ['movieTalk', `${content}`],
+    queryFn:
+      content === 'bestReviews'
+        ? getBestReviews
+        : content === 'latestReviews'
+        ? getLatestReviews
+        : getPopularUsers,
+  });
   return (
     <ul>
       {users &&

@@ -1,5 +1,5 @@
 type Props = {
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export default function FollowingBtn({ onClick }: Props) {

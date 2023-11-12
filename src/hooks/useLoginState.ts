@@ -8,7 +8,11 @@ import { useSetRecoilState } from "recoil";
 export default function useLoginState() {
   const setModalState = useSetRecoilState(modalStateAtom);
   const { data: loginState } = useQuery<ILoginState>({
+<<<<<<< HEAD
     queryKey: ["loginState"],
+=======
+    queryKey: ['loginState'],
+>>>>>>> feature/tanstack-v5
     queryFn: getLoginState,
   });
 

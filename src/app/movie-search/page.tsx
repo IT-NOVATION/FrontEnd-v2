@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import MovieSearch from "@/components/MovieSearch/MovieSearch";
 import { IMovieSearchMovies } from "@/interface/movieSearch";
 import { getMovieSearch } from "@/service/movieSearch";
@@ -6,6 +7,16 @@ import RightChevronIcon from "@/ui/icons/RightChevronIcon";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 import Link from "next/link";
+=======
+import MovieSearch from '@/components/MovieSearch/MovieSearch';
+import { IMovieSearchMovies } from '@/interface/movieSearch';
+import { getMovieSearch } from '@/service/movieSearch';
+import getQueryClient from '@/service/queryClient';
+import RightChevronIcon from '@/ui/icons/RightChevronIcon';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { Metadata } from 'next';
+import Link from 'next/link';
+>>>>>>> feature/tanstack-v5
 
 export const dynamic = "force-dynamic";
 
@@ -24,8 +35,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function MovieSearchPage() {
   const queryClient = getQueryClient();
   await queryClient.prefetchInfiniteQuery<IMovieSearchMovies>({
+<<<<<<< HEAD
     queryKey: ["movieSearch", "reviews"],
     queryFn: () => getMovieSearch("reviews", 1),
+=======
+    queryKey: ['movieSearch', 'reviews'],
+    queryFn: () => getMovieSearch('reviews', 1),
+>>>>>>> feature/tanstack-v5
     initialPageParam: 1,
   });
   const dehydratedState = dehydrate(queryClient);

@@ -11,11 +11,12 @@ type Props = {
 export default function CommentsArea({ reviewId }: Props) {
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery<IComments>({
     queryKey: ['comments', reviewId],
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: ({ pageParam }) =>
       getComments(`reviewId=${reviewId}&page=${pageParam}`),
+    initialPageParam: 0,
     getNextPageParam: ({ nowPage, lastPage }) => {
       if (nowPage === lastPage) {
-        return false;
+        return undefined;
       }
       return nowPage + 1;
     },

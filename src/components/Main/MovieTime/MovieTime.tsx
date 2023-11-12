@@ -1,14 +1,27 @@
+<<<<<<< HEAD
 import { IMovieTime } from "@/interface/movieTime";
 import { getMovieTime } from "@/service/movieTime";
 import getQueryClient from "@/service/queryClient";
 import ColorEllipseIcon from "@/ui/icons/ColorEllipseIcon";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import MovieTimeMoviesContainer from "./MovieTimeMoviesContainer/MovieTimeMoviesContainer";
+=======
+import { IMovieTime } from '@/interface/movieTime';
+import { getMovieTime } from '@/service/movieTime';
+import getQueryClient from '@/service/queryClient';
+import ColorEllipseIcon from '@/ui/icons/ColorEllipseIcon';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import MovieTimeMoviesContainer from './MovieTimeMoviesContainer/MovieTimeMoviesContainer';
+>>>>>>> feature/tanstack-v5
 
 export default async function MovieTime() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery<IMovieTime>({
+<<<<<<< HEAD
     queryKey: ["movieTime"],
+=======
+    queryKey: ['movieTime'],
+>>>>>>> feature/tanstack-v5
     queryFn: getMovieTime,
   });
   const dehydratedState = dehydrate(queryClient);

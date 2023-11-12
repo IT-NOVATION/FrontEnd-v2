@@ -13,7 +13,7 @@ import useSliderAnimation from "@/hooks/useSliderAnimation";
 export default function ReviewTimeContainer() {
   const { data } = useQuery<IReviewTime[]>({
     queryKey: ["reviewTime"],
-    queryFn:getReviewTime,
+    queryFn: getReviewTime,
     gcTime: 3600 * 2,
     staleTime: 3600 * 2,
   });

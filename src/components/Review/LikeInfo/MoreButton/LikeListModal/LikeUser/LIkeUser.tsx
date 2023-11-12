@@ -12,7 +12,7 @@ type Props = {
 export default function LikeUser({ user }: Props) {
   const { userId, profileImg, nickName, isLoginUserFollowing, isMyProfile } =
     user;
-  const handleClick = useFollowBtn(userId, ['reviewLikeInfo']);
+  const {handleClick} = useFollowBtn(userId, ['reviewLikeInfo']);
   return (
     <li
       key={userId}

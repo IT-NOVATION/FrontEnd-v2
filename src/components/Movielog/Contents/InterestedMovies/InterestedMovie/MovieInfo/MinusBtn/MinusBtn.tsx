@@ -6,19 +6,15 @@ type Props = {
   userId: number;
 };
 
-export default function MinusBtn({ movieId, userId }: Props) {
+export default function MinusBtn({ movieId }: Props) {
   const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation((data: { movieId: number }) =>
-    mutateMovieLike(data)
-  );
-  const handleClick = async () => {
+  const { mutate } = useMutation({
+    mutationFn: (data: { movieId: number }) => mutateMovieLike(data),
+    onSettled:()=> queryClient.invalidateQueries()
+  });
+  const handleClick =  () => {
     const data = { movieId };
-    try {
-      await mutateAsync(data);
-      await queryClient.invalidateQueries();
-    } catch (err) {
-      console.log(err);
-    }
+    mutate(data);
   };
   return (
     <button

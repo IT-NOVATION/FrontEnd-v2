@@ -23,7 +23,7 @@ export default function AuthorInfo({ author, isLoginUserFollowing }: Props) {
     userId,
     profileImg,
   } = author;
-  const handleClick = useFollowBtn(userId, ['review']);
+  const { handleClick } = useFollowBtn(userId, ['review']);
   return (
     <section
       className={`relative w-[100vw] h-[196px] ${

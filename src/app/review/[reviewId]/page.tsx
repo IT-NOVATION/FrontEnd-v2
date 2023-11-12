@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Review from "@/components/Review/Review";
 import { IComments } from "@/interface/comments";
 import { IReviewPage } from "@/interface/review";
@@ -6,6 +7,16 @@ import getQueryClient from "@/service/queryClient";
 import { getComments, getLikeInfo, getReview } from "@/service/review";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { Metadata } from "next";
+=======
+import Review from '@/components/Review/Review';
+import { IComments } from '@/interface/comments';
+import { IReviewPage } from '@/interface/review';
+import { IReviewLikeUser } from '@/interface/user';
+import getQueryClient from '@/service/queryClient';
+import { getComments, getLikeInfo, getReview } from '@/service/review';
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { Metadata } from 'next';
+>>>>>>> feature/tanstack-v5
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +48,7 @@ export async function generateMetadata({
 export default async function ReviewPage({ params: { reviewId } }: Props) {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery<IReviewPage>({
+<<<<<<< HEAD
     queryKey: ["review", reviewId],
     queryFn: () => getReview(reviewId),
   });
@@ -46,6 +58,17 @@ export default async function ReviewPage({ params: { reviewId } }: Props) {
   });
   await queryClient.prefetchInfiniteQuery<IComments>({
     queryKey: ["comments", reviewId],
+=======
+    queryKey: ['review', reviewId],
+    queryFn: () => getReview(reviewId),
+  });
+  await queryClient.prefetchQuery<IReviewLikeUser[]>({
+    queryKey: ['reviewLikeInfo', reviewId],
+    queryFn: () => getLikeInfo(reviewId),
+  });
+  await queryClient.prefetchInfiniteQuery<IComments>({
+    queryKey: ['comments', reviewId],
+>>>>>>> feature/tanstack-v5
     queryFn: () => getComments(`reviewId=${reviewId}&page=1`),
     initialPageParam: 1,
   });

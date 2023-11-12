@@ -13,7 +13,11 @@ export type ContentsType = "popular" | "recommended";
 
 export default function MovieTimeMoviesContainer() {
   const { data } = useQuery<IMovieTime>({
+<<<<<<< HEAD
     queryKey: ["movieTime"],
+=======
+    queryKey: ['movieTime'],
+>>>>>>> feature/tanstack-v5
     queryFn: getMovieTime,
     gcTime: 3600 * 2,
     staleTime: 3600 * 2,

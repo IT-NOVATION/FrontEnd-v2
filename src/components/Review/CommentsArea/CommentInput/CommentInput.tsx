@@ -23,13 +23,16 @@ export default function CommentInput({ reviewId }: Props) {
     checkAuth,
     state: { loginState, nickname, profileImg },
   } = useLoginState();
-  const { mutateAsync } = useMutation((data: IMutateComment) =>
-    mutateComment(data)
-  );
-  const onValid = async (data: IMutateComment) => {
-      await mutateAsync(data);
-      await queryClient.invalidateQueries(['comments', reviewId]);
-      setValue('commentText', '');
+  const { mutate } = useMutation({
+    mutationFn: (data: IMutateComment) => mutateComment(data),
+    onSuccess: () => setValue('commentText', ''),
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: ['comments', reviewId] }),
+  });
+  const onValid = (data: IMutateComment) => {
+    mutate(data);
+    //  queryClient.invalidateQueries({ queryKey: ['comments', reviewId] });
+    // setValue('commentText', '');
   };
   const onInvalid = ({ commentText }: FieldErrors<IMutateComment>) => {
     alert(commentText?.message);

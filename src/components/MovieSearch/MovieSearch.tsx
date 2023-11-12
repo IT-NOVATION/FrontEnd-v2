@@ -20,7 +20,8 @@ export default function MovieSearch() {
   const { data, hasNextPage, fetchNextPage } =
     useInfiniteQuery<IMovieSearchMovies>({
       queryKey: ['movieSearch', `${order}`],
-      queryFn: ({ pageParam = 1 }) => getMovieSearch(order, pageParam),
+      initialPageParam: 1,
+      queryFn: ({ pageParam }) => getMovieSearch(order, pageParam),
       getNextPageParam: ({ nowPage, lastPage }) => {
         if (nowPage === lastPage) {
           return false;
