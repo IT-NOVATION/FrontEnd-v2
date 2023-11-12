@@ -4,7 +4,6 @@ import localFont from 'next/font/local';
 import AccountModal from '@/components/AccountModal/AccountModal';
 import RecoilRootContext from '@/context/RecoilRootContext';
 import QueryClientContext from '@/context/QueryClientContext';
-import CookieProviderContext from '@/context/CookieProviderContext';
 
 const pretendard = localFont({
   src: './PretendardVariable.woff2',
@@ -54,11 +53,9 @@ export default function RootLayout({
       <body>
         <RecoilRootContext>
           <QueryClientContext>
-            <CookieProviderContext>
-              <NavigationBar />
-              <AccountModal />
-              {children}
-            </CookieProviderContext>
+            <NavigationBar />
+            <AccountModal />
+            {children}
           </QueryClientContext>
         </RecoilRootContext>
         <div id="portal" />
