@@ -3,6 +3,7 @@ import {
   IChangePasswordForm,
   IGetCodeForm,
   ILoginForm,
+  ILoginState,
   ISignupForm,
 } from '@/interface/account';
 import {
@@ -27,7 +28,7 @@ interface ITokenData {
 }
 
 // 액세스 토큰 갱신
-export const getRefreshedTokens = <T>(callback: T): Promise<T> =>
+export const getRefreshedTokens = (callback: (params?: any) => any) =>
   fetch(`${SERVER_URI}${REISSUE_URI}`, {
     headers: getRefreshTokenHeader(),
   })
@@ -41,11 +42,13 @@ export const getRefreshedTokens = <T>(callback: T): Promise<T> =>
       const { accessToken, refreshToken } = data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      return callback;
+      return callback();
     });
 
 // 로그인 상태
-export const getLoginState = () =>
+export const getLoginState: () =>
+  | Promise<ILoginState>
+  | Promise<(callback: (params?: any) => any) => Promise<any>> = () =>
   fetch(`${SERVER_URI}${LOGIN_STATE_URI}`, {
     headers: getAccessTokenHeader(),
   }).then((res) => {
@@ -78,7 +81,7 @@ export const logout = () =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(getLoginState);
+        return getRefreshedTokens(logout);
       }
       throw new Error(`${res.status} 에러 발생`);
     }
