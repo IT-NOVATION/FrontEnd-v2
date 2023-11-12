@@ -28,7 +28,7 @@ interface ITokenData {
 }
 
 // 액세스 토큰 갱신
-export const getRefreshedTokens = (callback: (params?: any) => any) =>
+export const getRefreshedTokens = () =>
   fetch(`${SERVER_URI}${REISSUE_URI}`, {
     headers: getRefreshTokenHeader(),
   })
@@ -42,24 +42,23 @@ export const getRefreshedTokens = (callback: (params?: any) => any) =>
       const { accessToken, refreshToken } = data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      return callback();
     });
 
 // 로그인 상태
-export const getLoginState: () =>
-  | Promise<ILoginState>
-  | Promise<(callback: (params?: any) => any) => Promise<any>> = () =>
-  fetch(`${SERVER_URI}${LOGIN_STATE_URI}`, {
+export const getLoginState: () => Promise<ILoginState> = async () => {
+  const res = await fetch(`${SERVER_URI}${LOGIN_STATE_URI}`, {
     headers: getAccessTokenHeader(),
-  }).then((res) => {
-    if (!res.ok) {
-      if (res.status === 401) {
-        return getRefreshedTokens(getLoginState);
-      }
-      throw new Error(`${res.status} 에러 발생`);
-    }
-    return res.json();
   });
+
+  if (!res.ok) {
+    if (res.status === 401) {
+      await getRefreshedTokens();
+    }
+    throw new Error(`${res.status} 에러 발생`);
+  }
+
+  return res.json();
+};
 
 export const login = (data: ILoginForm) =>
   fetch(`${SERVER_URI}${LOGIN_URI}`, {
@@ -81,7 +80,7 @@ export const logout = () =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(logout);
+        return getRefreshedTokens();
       }
       throw new Error(`${res.status} 에러 발생`);
     }
