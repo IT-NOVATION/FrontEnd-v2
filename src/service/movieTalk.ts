@@ -12,7 +12,7 @@ export const getBestReviews = () =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getBestReviews);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }
@@ -31,7 +31,7 @@ export const getPopularUsers = () =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getPopularUsers);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }
@@ -50,7 +50,7 @@ export const getLatestReviews = () =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getLatestReviews);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }

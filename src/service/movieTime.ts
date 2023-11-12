@@ -7,7 +7,7 @@ export const getMovieTime = () =>
   fetch(`${SERVER_URI}${GET_MOVIE_TIME_URI}`).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(getMovieTime);
+        getRefreshedTokens();
       }
       throw new Error(`${res.status} 에러 발생`);
     }

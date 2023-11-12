@@ -10,6 +10,9 @@ export const mutateFollow = (data: { targetUserId: number }) =>
     body: JSON.stringify(data),
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        getRefreshedTokens();
+      }
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;

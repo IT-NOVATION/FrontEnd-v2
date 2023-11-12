@@ -17,7 +17,7 @@ export const getReview = (reviewId: number) =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getReview);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }
@@ -71,7 +71,7 @@ export const getLikeInfo = (reviewId: number) =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getLoginState);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }
@@ -95,7 +95,7 @@ export const getComments = (params: string) =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getLoginState);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }
@@ -118,6 +118,9 @@ export const deleteComment = (commentId: number) =>
     headers: getAccessTokenHeader(),
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        getRefreshedTokens();
+      }
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;
@@ -131,6 +134,9 @@ export const mutateComment = (data: IMutateComment) =>
     body: JSON.stringify(data),
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        getRefreshedTokens();
+      }
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;

@@ -10,7 +10,7 @@ export const getMovieSearchResult = (params: string) =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(getLoginState);
+        getRefreshedTokens();
       }
       throw new Error(`${res.status} 에러 발생`);
     }
@@ -24,7 +24,7 @@ export const getUserSearchResult = (params: string) =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getLoginState);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }

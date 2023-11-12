@@ -10,7 +10,7 @@ export const writeReviewMovieInfo = (movieId: number) =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(getLoginState);
+        getRefreshedTokens();
       }
       throw new Error(`${res.status} 에러 발생`);
     }

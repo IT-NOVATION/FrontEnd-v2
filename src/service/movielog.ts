@@ -12,7 +12,7 @@ export const getMovielog = (userId: number) =>
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
-          return getRefreshedTokens(getMovielog);
+          getRefreshedTokens();
         }
         throw new Error(`${res.status} 에러 발생`);
       }
@@ -59,6 +59,9 @@ export const mutateProfileUpdate = (data: IMutateProfileUpdate) =>
     body: JSON.stringify(data),
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        getRefreshedTokens();
+      }
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;

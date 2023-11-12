@@ -11,7 +11,7 @@ export const getMovieInfo = (movieId: number) =>
   }).then((res) => {
     if (!res.ok) {
       if (res.status === 401) {
-        return getRefreshedTokens(getMovieInfo);
+        getRefreshedTokens();
       }
       throw new Error(`${res.status} 에러 발생`);
     }
@@ -36,6 +36,9 @@ export const rateMovie = (data: { movieId: number; starScore: number }) =>
     body: JSON.stringify(data),
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        getRefreshedTokens();
+      }
       throw new Error(`${res.status} 에러 발생`);
     }
     return res;
